@@ -18,37 +18,6 @@ if ( !("ontouchstart" in window) ) {
 $(document).on("mouseout", ".feature-row", clearHighlight);
 
 
-$("#about-btn").click(function() {
-  $("#aboutModal").modal("show");
-  $(".navbar-collapse.in").collapse("hide");
-  return false;
-});
-
-$("#full-extent-btn").click(function() {
-  map.fitBounds(boroughs.getBounds());
-  $(".navbar-collapse.in").collapse("hide");
-  return false;
-});
-
-$("#legend-btn").click(function() {
-  $("#legendModal").modal("show");
-  $(".navbar-collapse.in").collapse("hide");
-  return false;
-});
-
-$("#login-btn").click(function() {
-  $("#loginModal").modal("show");
-  $(".navbar-collapse.in").collapse("hide");
-  return false;
-});
-
-$("#list-btn").click(function() {
-  $('#sidebar').toggle();
-  map.invalidateSize();
-  return false;
-});
-
-
 
 $("#nav-btn").click(function() {
   $(".navbar-collapse").collapse("toggle");
@@ -160,7 +129,7 @@ var boroughs = L.geoJson(null, {
     });
   }
 });
-$.getJSON("data/boroughs.geojson", function (data) {
+$.getJSON("", function (data) { /* data/boroughs.geojson */
   boroughs.addData(data);
 });
 
@@ -274,7 +243,7 @@ var subwayLines = L.geoJson(null, {
     });
   }
 });
-$.getJSON("data/subways.geojson", function (data) {
+$.getJSON("", function (data) { /* data/subways.geojson */
   subwayLines.addData(data);
 });
 
@@ -326,7 +295,7 @@ var theaters = L.geoJson(null, {
 });
 $.getJSON("data/DOITT_THEATER_01_13SEPT2010.geojson", function (data) {
   theaters.addData(data);
-  map.addLayer(theaterLayer);
+  
 });
 
 /* Empty layer placeholder to add to layer control for listening when to add/remove museums to markerClusters layer */
@@ -346,7 +315,7 @@ var museums = L.geoJson(null, {
   },
   onEachFeature: function (feature, layer) {
     if (feature.properties) {
-      var content = "<table class='table table-striped table-bordered table-condensed'>" + "<tr><th>Name</th><td>" + feature.properties.NAME + "</td></tr>" + "<tr><th>Phone</th><td>" + feature.properties.TEL + "</td></tr>" + "<tr><th>Address</th><td>" + feature.properties.ADRESS1 + "</td></tr>" + "<tr><th>Website</th><td><a class='url-break' href='" + feature.properties.URL + "' target='_blank'>" + feature.properties.URL + "</a></td></tr>" + "<table>";
+      var content = "<table class='table table-striped table-bordered table-condensed'>" + "<tr><th>Name</th><td>" + feature.properties.NAME + "</td></tr>" + "<tr><th>Geotop-Nr</th><td>" + feature.properties.NUMBER + "</td></tr>" + "<tr><th>Website</th><td><a class='url-break' href='http://www.lfu.bayern.de/geologie/geotope_schoensten/" + feature.properties.NUMBER + "/index.htm' target='_blank'>Details</a>&nbsp;-&nbsp;<a class='url-break' href='http://www.lfu.bayern.de/geologie/geotope_schoensten/" + feature.properties.NUMBER + "/doc/"+feature.properties.NUMBER+"_schautafel.pdf' target='_blank'>Schautafel</a></td></tr>" + "<table>";
       layer.on({
         click: function (e) {
           $("#feature-title").html(feature.properties.NAME);
@@ -367,12 +336,17 @@ var museums = L.geoJson(null, {
     }
   }
 });
-$.getJSON("data/DOITT_MUSEUM_01_13SEPT2010.geojson", function (data) {
+$.getJSON("data/ByTop100Geotops.geojson", function (data) {
   museums.addData(data);
+  map.addLayer(museumLayer);
+      alert(museums);
 });
 
+
+
+
 map = L.map("map", {
-  zoom: 10,
+  zoom: 14,
   center: [48.94655556, 11.40447222],
   layers: [mapquestOSM, boroughs, markerClusters, highlight],
   zoomControl: false,
