@@ -61,7 +61,7 @@ function syncSidebar() {
   theaters.eachLayer(function (layer) {
     if (map.hasLayer(theaterLayer)) {
       if (map.getBounds().contains(layer.getLatLng())) {
-        $("#feature-list tbody").append('<tr class="feature-row" id="' + L.stamp(layer) + '" lat="' + layer.getLatLng().lat + '" lng="' + layer.getLatLng().lng + '"><td style="vertical-align: middle;"><img width="16" height="18" src="assets/img/theater.png"></td><td class="feature-name">' + layer.feature.properties.NAME + '</td><td style="vertical-align: middle;"><i class="fa fa-chevron-right pull-right"></i></td></tr>');
+        $("#feature-list tbody").append('<tr class="feature-row" id="' + L.stamp(layer) + '" lat="' + layer.getLatLng().lat + '" lng="' + layer.getLatLng().lng + '"><td style="vertical-align: middle;"><img width="16" height="18" src="assets/img/earthcache.png"></td><td class="feature-name">' + layer.feature.properties.NAME + '</td><td style="vertical-align: middle;"><i class="fa fa-chevron-right pull-right"></i></td></tr>');
       }
     }
   });
@@ -69,7 +69,7 @@ function syncSidebar() {
   geotops.eachLayer(function (layer) {
     if (map.hasLayer(geotopLayer)) {
       if (map.getBounds().contains(layer.getLatLng())) {
-        $("#feature-list tbody").append('<tr class="feature-row" id="' + L.stamp(layer) + '" lat="' + layer.getLatLng().lat + '" lng="' + layer.getLatLng().lng + '"><td style="vertical-align: middle;"><img width="16" height="18" src="assets/img/museum.png"></td><td class="feature-name">' + layer.feature.properties.NAME + '</td><td style="vertical-align: middle;"><i class="fa fa-chevron-right pull-right"></i></td></tr>');
+        $("#feature-list tbody").append('<tr class="feature-row" id="' + L.stamp(layer) + '" lat="' + layer.getLatLng().lat + '" lng="' + layer.getLatLng().lng + '"><td style="vertical-align: middle;"><img width="16" height="18" src="assets/img/geotop.png"></td><td class="feature-name">' + layer.feature.properties.NAME + '</td><td style="vertical-align: middle;"><i class="fa fa-chevron-right pull-right"></i></td></tr>');
       }
     }
   });
@@ -261,9 +261,9 @@ var theaters = L.geoJson(null, {
   pointToLayer: function (feature, latlng) {
     return L.marker(latlng, {
       icon: L.icon({
-        iconUrl: "assets/img/theater.png",
-        iconSize: [24, 28],
-        iconAnchor: [12, 28],
+        iconUrl: "assets/img/earthcache.png",
+        iconSize: [20, 23],
+        iconAnchor: [10, 23],
         popupAnchor: [0, -25]
       }),
       title: feature.properties.NAME,
@@ -281,7 +281,7 @@ var theaters = L.geoJson(null, {
           highlight.clearLayers().addLayer(L.circleMarker([feature.geometry.coordinates[1], feature.geometry.coordinates[0]], highlightStyle));
         }
       });
-      $("#feature-list tbody").append('<tr class="feature-row" id="' + L.stamp(layer) + '" lat="' + layer.getLatLng().lat + '" lng="' + layer.getLatLng().lng + '"><td style="vertical-align: middle;"><img width="16" height="18" src="assets/img/theater.png"></td><td class="feature-name">' + layer.feature.properties.NAME + '</td><td style="vertical-align: middle;"><i class="fa fa-chevron-right pull-right"></i></td></tr>');
+      $("#feature-list tbody").append('<tr class="feature-row" id="' + L.stamp(layer) + '" lat="' + layer.getLatLng().lat + '" lng="' + layer.getLatLng().lng + '"><td style="vertical-align: middle;"><img width="16" height="18" src="assets/img/earthcache.png"></td><td class="feature-name">' + layer.feature.properties.NAME + '</td><td style="vertical-align: middle;"><i class="fa fa-chevron-right pull-right"></i></td></tr>');
       theaterSearch.push({
         name: layer.feature.properties.NAME,
         address: layer.feature.properties.ADDRESS1,
@@ -304,9 +304,9 @@ var geotops = L.geoJson(null, {
   pointToLayer: function (feature, latlng) {
     return L.marker(latlng, {
       icon: L.icon({
-        iconUrl: "assets/img/museum.png",
-        iconSize: [24, 28],
-        iconAnchor: [12, 28],
+        iconUrl: "assets/img/geotop.png",
+        iconSize: [20, 23],
+        iconAnchor: [10, 23],
         popupAnchor: [0, -25]
       }),
       title: feature.properties.NAME,
@@ -324,7 +324,7 @@ var geotops = L.geoJson(null, {
           highlight.clearLayers().addLayer(L.circleMarker([feature.geometry.coordinates[1], feature.geometry.coordinates[0]], highlightStyle));
         }
       });
-      $("#feature-list tbody").append('<tr class="feature-row" id="' + L.stamp(layer) + '" lat="' + layer.getLatLng().lat + '" lng="' + layer.getLatLng().lng + '"><td style="vertical-align: middle;"><img width="16" height="18" src="assets/img/museum.png"></td><td class="feature-name">' + layer.feature.properties.NAME + '</td><td style="vertical-align: middle;"><i class="fa fa-chevron-right pull-right"></i></td></tr>');
+      $("#feature-list tbody").append('<tr class="feature-row" id="' + L.stamp(layer) + '" lat="' + layer.getLatLng().lat + '" lng="' + layer.getLatLng().lng + '"><td style="vertical-align: middle;"><img width="20" height="23" src="assets/img/geotop.png"></td><td class="feature-name">' + layer.feature.properties.NAME + '</td><td style="vertical-align: middle;"><i class="fa fa-chevron-right pull-right"></i></td></tr>');
       museumSearch.push({
         name: layer.feature.properties.NAME,
         address: layer.feature.properties.ADRESS1,
@@ -339,14 +339,13 @@ var geotops = L.geoJson(null, {
 $.getJSON("data/ByTop100Geotops.geojson", function (data) {
   geotops.addData(data);
   map.addLayer(geotopLayer);
-      alert(geotops);
 });
 
 
 
 
 map = L.map("map", {
-  zoom: 14,
+  zoom: 8,
   center: [48.94655556, 11.40447222],
   layers: [mapquestOSM, boroughs, markerClusters, highlight],
   zoomControl: false,
@@ -361,6 +360,7 @@ map.on("overlayadd", function(e) {
   }
   if (e.layer === geotopLayer) {
     markerClusters.addLayer(geotops);
+	// TODO: no clusters: map.addLayer(geotops)
     syncSidebar();
   }
 });
@@ -458,8 +458,8 @@ var baseLayers = {
 
 var groupedOverlays = {
   "Points of Interest": {
-    "<img src='assets/img/museum.png' width='24' height='28'>&nbsp;Geotope": geotopLayer,
-	"<img src='assets/img/theater.png' width='24' height='28'>&nbsp;Theaters": theaterLayer
+    "<img src='assets/img/geotop.png' width='20' height='23'>&nbsp;Geotope": geotopLayer,
+	"<img src='assets/img/earthcache.png' width='20' height='23'>&nbsp;Theaters": theaterLayer
   },
   "Reference": {
     "Boroughs": boroughs,
@@ -578,7 +578,7 @@ $(document).one("ajaxStop", function () {
     displayKey: "name",
     source: theatersBH.ttAdapter(),
     templates: {
-      header: "<h4 class='typeahead-header'><img src='assets/img/theater.png' width='24' height='28'>&nbsp;Theaters</h4>",
+      header: "<h4 class='typeahead-header'><img src='assets/img/earthcache.png' width='24' height='28'>&nbsp;Earthcaches</h4>",
       suggestion: Handlebars.compile(["{{name}}<br>&nbsp;<small>{{address}}</small>"].join(""))
     }
   }, {
@@ -586,7 +586,7 @@ $(document).one("ajaxStop", function () {
     displayKey: "name",
     source: museumsBH.ttAdapter(),
     templates: {
-      header: "<h4 class='typeahead-header'><img src='assets/img/museum.png' width='24' height='28'>&nbsp;geotops</h4>",
+      header: "<h4 class='typeahead-header'><img src='assets/img/geotop.png' width='24' height='28'>&nbsp;geotops</h4>",
       suggestion: Handlebars.compile(["{{name}}<br>&nbsp;<small>{{address}}</small>"].join(""))
     }
   }, {
