@@ -61,7 +61,7 @@ function syncSidebar() {
   theaters.eachLayer(function (layer) {
     if (map.hasLayer(theaterLayer)) {
       if (map.getBounds().contains(layer.getLatLng())) {
-        $("#feature-list tbody").append('<tr class="feature-row" id="' + L.stamp(layer) + '" lat="' + layer.getLatLng().lat + '" lng="' + layer.getLatLng().lng + '"><td style="vertical-align: middle;"><img width="20" height="23" src="assets/img/earthcache.png"></td><td class="feature-name">' + layer.feature.properties.NAME + '<br><span class="feature-subname">Geotop Nummer '+layer.feature.properties.NUMBER+'</span></td><td style="vertical-align: middle;"><i class="fa fa-chevron-right pull-right"></i></td></tr>');
+        $("#feature-list tbody").append('<tr class="feature-row" id="' + L.stamp(layer) + '" lat="' + layer.getLatLng().lat + '" lng="' + layer.getLatLng().lng + '"><td style="vertical-align: middle;"><img width="20" height="23" src="assets/img/earthcache.png"></td><td class="feature-name">' + layer.feature.properties.NAME + '<br><span class="feature-subname">Geotop Nummer '+layer.feature.properties.NUMBER+'<br>'+layer.feature.properties.CODE+'</span></td><td style="vertical-align: middle;"><i class="fa fa-chevron-right pull-right"></i></td></tr>');
       }
     }
   });
@@ -272,10 +272,10 @@ var theaters = L.geoJson(null, {
   },
   onEachFeature: function (feature, layer) {
     if (feature.properties) {
-      var content = "<table class='table table-striped table-bordered table-condensed'>" + "<tr><th>Name</th><td>" + feature.properties.NAME + "</td></tr>" + "<tr><th>Phone</th><td>" + feature.properties.TEL + "</td></tr>" + "<tr><th>Address</th><td>" + feature.properties.ADDRESS1 + "</td></tr>" + "<tr><th>Website</th><td><a class='url-break' href='" + feature.properties.URL + "' target='_blank'>" + feature.properties.URL + "</a></td></tr>" + "<table>";
+      var content = "<table class='table table-striped table-bordered table-condensed'>" + "<tr><th>Name</th><td>" + feature.properties.NAME + "</td></tr>" + "<tr><th>Website</th><td><a class='url-break' href='http://coord.info/" + feature.properties.CODE + "' target='_blank'>http://coord.info/" + feature.properties.CODE + "</a></td></tr>" + "<table>";
       layer.on({
         click: function (e) {
-          $("#feature-title").html(feature.properties.NAME);
+          $("#feature-title").html('<img width="20" height="23" src="assets/img/geotop.png">&nbsp;'+feature.properties.NAME);
           $("#feature-info").html(content);
           $("#featureModal").modal("show");
           highlight.clearLayers().addLayer(L.circleMarker([feature.geometry.coordinates[1], feature.geometry.coordinates[0]], highlightStyle));
@@ -318,7 +318,7 @@ var geotops = L.geoJson(null, {
       var content = "<table class='table table-striped table-bordered table-condensed'>" + "<tr><th>Name</th><td>" + feature.properties.NAME + "</td></tr>" + "<tr><th>Geotop-Nr</th><td>" + feature.properties.NUMBER + "</td></tr>" + "<tr><th>Website</th><td><a class='url-break' href='http://www.lfu.bayern.de/geologie/geotope_schoensten/" + feature.properties.NUMBER + "/index.htm' target='_blank'>Details</a>&nbsp;-&nbsp;<a class='url-break' href='http://www.lfu.bayern.de/geologie/geotope_schoensten/" + feature.properties.NUMBER + "/doc/"+feature.properties.NUMBER+"_schautafel.pdf' target='_blank'>Schautafel</a></td></tr>" + "<table>";
       layer.on({
         click: function (e) {
-          $("#feature-title").html(feature.properties.NAME);
+          $("#feature-title").html('<img width="20" height="23" src="assets/img/geotop.png">&nbsp;'+feature.properties.NAME);
           $("#feature-info").html(content);
           $("#featureModal").modal("show");
           highlight.clearLayers().addLayer(L.circleMarker([feature.geometry.coordinates[1], feature.geometry.coordinates[0]], highlightStyle));
