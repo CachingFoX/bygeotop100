@@ -461,10 +461,6 @@ var groupedOverlays = {
     "<img src='assets/img/geotop.png' width='20' height='23'>&nbsp;Geotope": geotopLayer,
 	"<img src='assets/img/earthcache.png' width='20' height='23'>&nbsp;Earthcaches": theaterLayer
   },
-  "Reference": {
-    "Boroughs": boroughs,
-    "Subway Lines": subwayLines
-  }
 };
 
 var layerControl = L.control.groupedLayers(baseLayers, groupedOverlays, {
