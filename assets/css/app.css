@@ -54,6 +54,10 @@ input[type="radio"], input[type="checkbox"] {
 .feature-row {
   cursor: pointer;
 }
+.feature-subname {
+  font-weight: normal;
+  font-size: 11px;
+}
 .sidebar-wrapper {
   width: 100%;
   height: 100%;
