@@ -65,9 +65,9 @@ function syncSidebar() {
       }
     }
   });
-  /* Loop through museums layer and add only features which are in the map bounds */
-  museums.eachLayer(function (layer) {
-    if (map.hasLayer(museumLayer)) {
+  /* Loop through geotops layer and add only features which are in the map bounds */
+  geotops.eachLayer(function (layer) {
+    if (map.hasLayer(geotopLayer)) {
       if (map.getBounds().contains(layer.getLatLng())) {
         $("#feature-list tbody").append('<tr class="feature-row" id="' + L.stamp(layer) + '" lat="' + layer.getLatLng().lat + '" lng="' + layer.getLatLng().lng + '"><td style="vertical-align: middle;"><img width="16" height="18" src="assets/img/museum.png"></td><td class="feature-name">' + layer.feature.properties.NAME + '</td><td style="vertical-align: middle;"><i class="fa fa-chevron-right pull-right"></i></td></tr>');
       }
@@ -298,9 +298,9 @@ $.getJSON("data/DOITT_THEATER_01_13SEPT2010.geojson", function (data) {
   
 });
 
-/* Empty layer placeholder to add to layer control for listening when to add/remove museums to markerClusters layer */
-var museumLayer = L.geoJson(null);
-var museums = L.geoJson(null, {
+/* Empty layer placeholder to add to layer control for listening when to add/remove geotops to markerClusters layer */
+var geotopLayer = L.geoJson(null);
+var geotops = L.geoJson(null, {
   pointToLayer: function (feature, latlng) {
     return L.marker(latlng, {
       icon: L.icon({
@@ -328,7 +328,7 @@ var museums = L.geoJson(null, {
       museumSearch.push({
         name: layer.feature.properties.NAME,
         address: layer.feature.properties.ADRESS1,
-        source: "Museums",
+        source: "geotops",
         id: L.stamp(layer),
         lat: layer.feature.geometry.coordinates[1],
         lng: layer.feature.geometry.coordinates[0]
@@ -337,9 +337,9 @@ var museums = L.geoJson(null, {
   }
 });
 $.getJSON("data/ByTop100Geotops.geojson", function (data) {
-  museums.addData(data);
-  map.addLayer(museumLayer);
-      alert(museums);
+  geotops.addData(data);
+  map.addLayer(geotopLayer);
+      alert(geotops);
 });
 
 
@@ -359,8 +359,8 @@ map.on("overlayadd", function(e) {
     markerClusters.addLayer(theaters);
     syncSidebar();
   }
-  if (e.layer === museumLayer) {
-    markerClusters.addLayer(museums);
+  if (e.layer === geotopLayer) {
+    markerClusters.addLayer(geotops);
     syncSidebar();
   }
 });
@@ -370,8 +370,8 @@ map.on("overlayremove", function(e) {
     markerClusters.removeLayer(theaters);
     syncSidebar();
   }
-  if (e.layer === museumLayer) {
-    markerClusters.removeLayer(museums);
+  if (e.layer === geotopLayer) {
+    markerClusters.removeLayer(geotops);
     syncSidebar();
   }
 });
@@ -458,8 +458,8 @@ var baseLayers = {
 
 var groupedOverlays = {
   "Points of Interest": {
-    "<img src='assets/img/theater.png' width='24' height='28'>&nbsp;Theaters": theaterLayer,
-    "<img src='assets/img/museum.png' width='24' height='28'>&nbsp;Museums": museumLayer
+    "<img src='assets/img/museum.png' width='24' height='28'>&nbsp;Geotope": geotopLayer,
+	"<img src='assets/img/theater.png' width='24' height='28'>&nbsp;Theaters": theaterLayer
   },
   "Reference": {
     "Boroughs": boroughs,
@@ -517,7 +517,7 @@ $(document).one("ajaxStop", function () {
   });
 
   var museumsBH = new Bloodhound({
-    name: "Museums",
+    name: "geotops",
     datumTokenizer: function (d) {
       return Bloodhound.tokenizers.whitespace(d.name);
     },
@@ -582,11 +582,11 @@ $(document).one("ajaxStop", function () {
       suggestion: Handlebars.compile(["{{name}}<br>&nbsp;<small>{{address}}</small>"].join(""))
     }
   }, {
-    name: "Museums",
+    name: "geotops",
     displayKey: "name",
     source: museumsBH.ttAdapter(),
     templates: {
-      header: "<h4 class='typeahead-header'><img src='assets/img/museum.png' width='24' height='28'>&nbsp;Museums</h4>",
+      header: "<h4 class='typeahead-header'><img src='assets/img/museum.png' width='24' height='28'>&nbsp;geotops</h4>",
       suggestion: Handlebars.compile(["{{name}}<br>&nbsp;<small>{{address}}</small>"].join(""))
     }
   }, {
@@ -609,9 +609,9 @@ $(document).one("ajaxStop", function () {
         map._layers[datum.id].fire("click");
       }
     }
-    if (datum.source === "Museums") {
-      if (!map.hasLayer(museumLayer)) {
-        map.addLayer(museumLayer);
+    if (datum.source === "geotops") {
+      if (!map.hasLayer(geotopLayer)) {
+        map.addLayer(geotopLayer);
       }
       map.setView([datum.lat, datum.lng], 17);
       if (map._layers[datum.id]) {
