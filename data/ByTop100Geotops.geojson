@@ -1,0 +1,1702 @@
+var coorsField = [
+{
+	"type": "Feature",
+	"properties": {
+		"geotop" : {
+			"nr" : "1",
+			"name" : "Großer Pfahl bei Viechtach"
+		},
+		"geocaches" : [{
+			"name": "~Der Große Pfahl~ – Bavarian’s Geotope #1",
+			"code": "GC1G4MH"
+		}]
+	},
+	"geometry": {
+		"type": "Point",
+		"coordinates": [12.86276667,49.08216667]
+	}
+},
+{
+	"type": "Feature",
+	"properties": {
+		"geotop" : {
+			"nr" : "2",
+			"name" : "Gletscherschliff bei Fischbach"
+		},
+		"geocaches" : [{
+			"name": "Der Gletscherschliff im Inntal",
+			"code": "GC1PN2K"
+		}]
+	},
+	"geometry": {
+		"type": "Point",
+		"coordinates": [12.15123333,47.71016667]
+	}
+},
+{
+	"type": "Feature",
+	"properties": {
+		"geotop" : {
+			"nr" : "3",
+			"name" : "Burgstein bei Dollnstein"
+		},
+		"geocaches" : [{
+			"name": "Burgstein bei Dollnstein",
+			"code": "GC1QN4N"
+		}]
+	},
+	"geometry": {
+		"type": "Point",
+		"coordinates": [11.0934,48.86736667]
+	}
+},
+{
+	"type": "Feature",
+	"properties": {
+		"geotop" : {
+			"nr" : "4",
+			"name" : "Burgberg Falkenberg"
+		},
+		"geocaches" : [{
+			"name": "Burg Falkenberg - Falkenberger Granit",
+			"code": "GC1YZMV"
+		}]
+	},
+	"geometry": {
+		"type": "Point",
+		"coordinates": [12.22481667,49.85906667]
+	}
+},
+{
+	"type": "Feature",
+	"properties": {
+		"geotop" : {
+			"nr" : "5",
+			"name" : "Diabasbruch am Galgenberg"
+		},
+		"geocaches" : [{
+			"name": "Diabasbruch am Galgenberg",
+			"code": "GC22FVN"
+		}]
+	},
+	"geometry": {
+		"type": "Point",
+		"coordinates": [11.54345,50.27021667]
+	}
+},
+{
+	"type": "Feature",
+	"properties": {
+		"geotop" : {
+			"nr" : "6",
+			"name" : "Ehemaliger Steinbruch im Pingartener Porphyr"
+		},
+		"geocaches" : [{
+			"name": "Pingartener Porphyr",
+			"code": "GC1JMHD"
+		}]
+	},
+	"geometry": {
+		"type": "Point",
+		"coordinates": [12.32741667,49.3161]
+	}
+},
+{
+	"type": "Feature",
+	"properties": {
+		"geotop" : {
+			"nr" : "7",
+			"name" : "Basaltbruch am Lindenstumpf"
+		},
+		"geocaches" : [{
+			"name": "Geotop Lindenstumpf",
+			"code": "GC195QR"
+		}]
+	},
+	"geometry": {
+		"type": "Point",
+		"coordinates": [9.860133333,50.27741667]
+	}
+},
+{
+	"type": "Feature",
+	"properties": {
+		"geotop" : {
+			"nr" : "8",
+			"name" : "Lechfall und Klamm bei Füssen"
+		},
+		"geocaches" : [{
+			"name": "Geotop ~Lechfall~",
+			"code": "GC206D0"
+		}]
+	},
+	"geometry": {
+		"type": "Point",
+		"coordinates": [10.69515,47.56208333]
+	}
+},
+{
+	"type": "Feature",
+	"properties": {
+		"geotop" : {
+			"nr" : "9",
+			"name" : "Steinbruch Aumühle"
+		},
+		"geocaches" : [{
+			"name": "Steinbruch Aumühle (The Ries Impact)",
+			"code": "GC30GG5"
+		}]
+	},
+	"geometry": {
+		"type": "Point",
+		"coordinates": [10.62943333,48.96983333]
+	}
+},
+{
+	"type": "Feature",
+	"properties": {
+		"geotop" : {
+			"nr" : "10",
+			"name" : "Gipsbruch Endsee"
+		},
+		"geocaches" : [{
+			"name": "Gipsbruch Endsee",
+			"code": "GC2C1F3"
+		}]
+	},
+	"geometry": {
+		"type": "Point",
+		"coordinates": [10.24583333,49.44488333]
+	}
+},
+{
+	"type": "Feature",
+	"properties": {
+		"geotop" : {
+			"nr" : "11",
+			"name" : "Sandsteinfelsen Nürnberger Kaiserburg"
+		},
+		"geocaches" : [{
+			"name": "Bayerns schönste Geotope Nr. 11 / Lovely Geotope",
+			"code": "GC1WRE9"
+		}]
+	},
+	"geometry": {
+		"type": "Point",
+		"coordinates": [11.0772,49.45758333]
+	}
+},
+{
+	"type": "Feature",
+	"properties": {
+		"geotop" : {
+			"nr" : "12",
+			"name" : "Frickenhäuser See"
+		},
+		"geocaches" : [{
+			"name": "Frickenhäuser See",
+			"code": "GC1RHZT"
+		}]
+	},
+	"geometry": {
+		"type": "Point",
+		"coordinates": [10.23588333,50.40305]
+	}
+},
+{
+	"type": "Feature",
+	"properties": {
+		"geotop" : {
+			"nr" : "13",
+			"name" : "Weltenburger Enge"
+		},
+		"geocaches" : [{
+			"name": "Weltenburger Enge",
+			"code": "GC1PQRD"
+		}]
+	},
+	"geometry": {
+		"type": "Point",
+		"coordinates": [11.82063333,48.8993]
+	}
+},
+{
+	"type": "Feature",
+	"properties": {
+		"geotop" : {
+			"nr" : "14",
+			"name" : "Marmorsteinbruch Horwagen"
+		},
+		"geocaches" : [{
+			"name": "Marmorsteinbruch Horwagen",
+			"code": "GC21N9Z"
+		}]
+	},
+	"geometry": {
+		"type": "Point",
+		"coordinates": [11.6475,50.3358]
+	}
+},
+{
+	"type": "Feature",
+	"properties": {
+		"geotop" : {
+			"nr" : "15",
+			"name" : "Findling Dengelstein"
+		},
+		"geocaches" : [{
+			"name": "Findling / Erratic block Dengelstein",
+			"code": "GC20X0Y"
+		}]
+	},
+	"geometry": {
+		"type": "Point",
+		"coordinates": [10.40651667,47.71043333]
+	}
+},
+{
+	"type": "Feature",
+	"properties": {
+		"geotop" : {
+			"nr" : "16",
+			"name" : "Partnachklamm"
+		},
+		"geocaches" : [{
+			"name": "Die Partnachklamm / The Partnach Gorge",
+			"code": "GC1WYTT"
+		}]
+	},
+	"geometry": {
+		"type": "Point",
+		"coordinates": [11.11911667,47.46951667]
+	}
+},
+{
+	"type": "Feature",
+	"properties": {
+		"geotop" : {
+			"nr" : "17",
+			"name" : "Silberberg Bodenmais"
+		},
+		"geocaches" : [{
+			"name": "Geotop Silberberg",
+			"code": "GC23JPQ"
+		}]
+	},
+	"geometry": {
+		"type": "Point",
+		"coordinates": [13.12183333,49.05846667]
+	}
+},
+{
+	"type": "Feature",
+	"properties": {
+		"geotop" : {
+			"nr" : "18",
+			"name" : "Klettergarten Baierbrunn"
+		},
+		"geocaches" : [{
+			"name": "Kletterwand Baierbrunn",
+			"code": "GC20FN9"
+		}]
+	},
+	"geometry": {
+		"type": "Point",
+		"coordinates": [11.49946667,48.02876667]
+	}
+},
+{
+	"type": "Feature",
+	"properties": {
+		"geotop" : {
+			"nr" : "19",
+			"name" : "Wachsender Felsen von Usterling"
+		},
+		"geocaches" : [{
+			"name": "The Growing Rock of Usterling",
+			"code": "GC1RK2W"
+		}]
+	},
+	"geometry": {
+		"type": "Point",
+		"coordinates": [12.64895,48.66296667]
+	}
+},
+{
+	"type": "Feature",
+	"properties": {
+		"geotop" : {
+			"nr" : "20",
+			"name" : "Basaltkegel Hoher Parkstein"
+		},
+		"geocaches" : [{
+			"name": "Hoher Parkstein",
+			"code": "GC1WK3T"
+		}]
+	},
+	"geometry": {
+		"type": "Point",
+		"coordinates": [12.07061667,49.73133333]
+	}
+},
+{
+	"type": "Feature",
+	"properties": {
+		"geotop" : {
+			"nr" : "21",
+			"name" : "Oertels Dachschieferbruch"
+		},
+		"geocaches" : [{
+			"name": "Oertels Dachschieferbruch ",
+			"code": "GC1RY4Q"
+		}]
+	},
+	"geometry": {
+		"type": "Point",
+		"coordinates": [11.37265,50.48321667]
+	}
+},
+{
+	"type": "Feature",
+	"properties": {
+		"geotop" : {
+			"nr" : "22",
+			"name" : "Schwarzachschlucht"
+		},
+		"geocaches" : [{
+			"name": "Die Schwarzachschlucht",
+			"code": "GC1Q1V4"
+		}]
+	},
+	"geometry": {
+		"type": "Point",
+		"coordinates": [11.20655,49.35485]
+	}
+},
+{
+	"type": "Feature",
+	"properties": {
+		"geotop" : {
+			"nr" : "23",
+			"name" : "Kupferbergwerk Wilhelmine"
+		},
+		"geocaches" : [{
+			"name": "Schöne Wilhelmine",
+			"code": "GC1X32T"
+		}]
+	},
+	"geometry": {
+		"type": "Point",
+		"coordinates": [9.272583333,50.06898333]
+	}
+},
+{
+	"type": "Feature",
+	"properties": {
+		"geotop" : {
+			"nr" : "24",
+			"name" : "Scheidegger Wasserfälle"
+		},
+		"geocaches" : [{
+			"name": "Die Scheidegger Wasserfälle",
+			"code": "GC1YTY7"
+		}]
+	},
+	"geometry": {
+		"type": "Point",
+		"coordinates": [9.839216667,47.5919]
+	}
+},
+{
+	"type": "Feature",
+	"properties": {
+		"geotop" : {
+			"nr" : "25",
+			"name" : "Steinerne Agnes"
+		},
+		"geocaches" : [{
+			"name": "Steinerne Agnes Stone/Petrified Agnes",
+			"code": "GC1RCCR"
+		}]
+	},
+	"geometry": {
+		"type": "Point",
+		"coordinates": [12.90905,47.6861]
+	}
+},
+{
+	"type": "Feature",
+	"properties": {
+		"geotop" : {
+			"nr" : "26",
+			"name" : "Buchberger Leite am Bayerischen Pfahl"
+		},
+		"geocaches" : [{
+			"name": "Buchberger Leite - Ringelaier Hängebrücke & Pfahl",
+			"code": "GC1WW3G"
+		}]
+	},
+	"geometry": {
+		"type": "Point",
+		"coordinates": [13.51325,48.82061667]
+	}
+},
+{
+	"type": "Feature",
+	"properties": {
+		"geotop" : {
+			"nr" : "27",
+			"name" : "Luisenburg-Felsenlabyrinth"
+		},
+		"geocaches" : [{
+			"name": "Felsenlabyrinth Luisenburg",
+			"code": "GC1ZTX9"
+		}]
+	},
+	"geometry": {
+		"type": "Point",
+		"coordinates": [11.9913,50.01226667]
+	}
+},
+{
+	"type": "Feature",
+	"properties": {
+		"geotop" : {
+			"nr" : "28",
+			"name" : "Hesselberg"
+		},
+		"geocaches" : [{
+			"name": "Mittelfranken's Höchster",
+			"code": "GC4YAT2"
+		}]
+	},
+	"geometry": {
+		"type": "Point",
+		"coordinates": [10.52616667,49.06856667]
+	}
+},
+{
+	"type": "Feature",
+	"properties": {
+		"geotop" : {
+			"nr" : "29",
+			"name" : "Felsburg Tüchersfeld"
+		},
+		"geocaches" : [{
+			"name": "Felsburg Tüchersfeld",
+			"code": "GC22ZAG"
+		}]
+	},
+	"geometry": {
+		"type": "Point",
+		"coordinates": [11.36201667,49.78475]
+	}
+},
+{
+	"type": "Feature",
+	"properties": {
+		"geotop" : {
+			"nr" : "30",
+			"name" : "Impaktgesteine Wengenhausen"
+		},
+		"geocaches" : [{
+			"name": "Impaktdiamanten",
+			"code": "GC4QTR1"
+		}]
+	},
+	"geometry": {
+		"type": "Point",
+		"coordinates": [10.46278333,48.91101667]
+	}
+},
+{
+	"type": "Feature",
+	"properties": {
+		"geotop" : {
+			"nr" : "31",
+			"name" : "Breitachklamm"
+		},
+		"geocaches" : [{
+			"name": "Der grosse Zwing",
+			"code": "GC1VKGD"
+		}]
+	},
+	"geometry": {
+		"type": "Point",
+		"coordinates": [10.23105,47.40131667]
+	}
+},
+{
+	"type": "Feature",
+	"properties": {
+		"geotop" : {
+			"nr" : "32",
+			"name" : "Blockmeer am Lusen"
+		},
+		"geocaches" : [{
+			"name": "Das Blockmeer am Lusengipfel",
+			"code": "GC2E38V"
+		}]
+	},
+	"geometry": {
+		"type": "Point",
+		"coordinates": [13.50736667,48.93788333]
+	}
+},
+{
+	"type": "Feature",
+	"properties": {
+		"geotop" : {
+			"nr" : "33",
+			"name" : "Eiszerfallslandschaft Osterseen"
+		},
+		"geocaches" : [{
+			"name": "Osterseen",
+			"code": "GC4CZYE"
+		}]
+	},
+	"geometry": {
+		"type": "Point",
+		"coordinates": [11.3143,47.77278333]
+	}
+},
+{
+	"type": "Feature",
+	"properties": {
+		"geotop" : {
+			"nr" : "34",
+			"name" : "Karlsgraben"
+		},
+		"geocaches" : [{
+			"name": "Karlsgraben",
+			"code": "GC1XGJQ"
+		}]
+	},
+	"geometry": {
+		"type": "Point",
+		"coordinates": [10.92205,48.98385]
+	}
+},
+{
+	"type": "Feature",
+	"properties": {
+		"geotop" : {
+			"nr" : "35",
+			"name" : "Muschelkalkprofil Kalbenstein"
+		},
+		"geocaches" : [{
+			"name": "Muschelkalkprofil Kalbenstein",
+			"code": "GC1XDYT"
+		}]
+	},
+	"geometry": {
+		"type": "Point",
+		"coordinates": [9.762683333,49.99026667]
+	}
+},
+{
+	"type": "Feature",
+	"properties": {
+		"geotop" : {
+			"nr" : "36",
+			"name" : "Kreuzberg in Pleystein"
+		},
+		"geocaches" : [{
+			"name": "Pleystein",
+			"code": "GC16PRM"
+		}]
+	},
+	"geometry": {
+		"type": "Point",
+		"coordinates": [12.41203333,49.64593333]
+	}
+},
+{
+	"type": "Feature",
+	"properties": {
+		"geotop" : {
+			"nr" : "37",
+			"name" : "Toteisloch Wolfsgrube"
+		},
+		"geocaches" : [{
+			"name": "Toteisloch Wolfsgrube",
+			"code": "GC39YZ7"
+		}]
+	},
+	"geometry": {
+		"type": "Point",
+		"coordinates": [11.16951667,48.12721667]
+	}
+},
+{
+	"type": "Feature",
+	"properties": {
+		"geotop" : {
+			"nr" : "38",
+			"name" : "Ofnethöhlen"
+		},
+		"geocaches" : [{
+			"name": "Geotop Nr. 38 Ofnethöhlen",
+			"code": "GC1ZTH4"
+		}]
+	},
+	"geometry": {
+		"type": "Point",
+		"coordinates": [10.45043333,48.81846667]
+	}
+},
+{
+	"type": "Feature",
+	"properties": {
+		"geotop" : {
+			"nr" : "39",
+			"name" : "Eklogit am Weißenstein"
+		},
+		"geocaches" : [{
+			"name": "Eklogit am Weißenstein",
+			"code": "GC22FTR"
+		}]
+	},
+	"geometry": {
+		"type": "Point",
+		"coordinates": [11.6902,50.1299]
+	}
+},
+{
+	"type": "Feature",
+	"properties": {
+		"geotop" : {
+			"nr" : "40",
+			"name" : "Gipskarstquelle Bodenloses Loch"
+		},
+		"geocaches" : [{
+			"name": "Gipskarstquelle Bodenloses Loch",
+			"code": "GC2D3Y8"
+		}]
+	},
+	"geometry": {
+		"type": "Point",
+		"coordinates": [10.1959,49.28751667]
+	}
+},
+{
+	"type": "Feature",
+	"properties": {
+		"geotop" : {
+			"nr" : "41",
+			"name" : "Steinerne Frau am Walberla"
+		},
+		"geocaches" : [{
+			"name": "Steinerne Frau am Walberla",
+			"code": "GC1T5HG"
+		}]
+	},
+	"geometry": {
+		"type": "Point",
+		"coordinates": [11.1496,49.72151667]
+	}
+},
+{
+	"type": "Feature",
+	"properties": {
+		"geotop" : {
+			"nr" : "42",
+			"name" : "Findling von Steinwies"
+		},
+		"geocaches" : [{
+			"name": "Findling von Steinwies - Glacial Erratic Boulder",
+			"code": "GC1PPP3"
+		}]
+	},
+	"geometry": {
+		"type": "Point",
+		"coordinates": [11.93545,47.8097]
+	}
+},
+{
+	"type": "Feature",
+	"properties": {
+		"geotop" : {
+			"nr" : "43",
+			"name" : "Teufelsküche Obergünzburg"
+		},
+		"geocaches" : [{
+			"name": "Teufelsküche / Hell's Kitchen Obergünzburg",
+			"code": "GC20CRE"
+		}]
+	},
+	"geometry": {
+		"type": "Point",
+		"coordinates": [10.41486667,47.87405]
+	}
+},
+{
+	"type": "Feature",
+	"properties": {
+		"geotop" : {
+			"nr" : "44",
+			"name" : "Burgruine Rotenhan"
+		},
+		"geocaches" : [{
+			"name": "Rotenhan",
+			"code": "GC1VNWA"
+		}]
+	},
+	"geometry": {
+		"type": "Point",
+		"coordinates": [10.79185,50.11411667]
+	}
+},
+{
+	"type": "Feature",
+	"properties": {
+		"geotop" : {
+			"nr" : "45",
+			"name" : "Bodenmühlwand"
+		},
+		"geocaches" : [{
+			"name": "Bodenmühlwand",
+			"code": "GC1A3AG"
+		}]
+	},
+	"geometry": {
+		"type": "Point",
+		"coordinates": [11.61645,49.91245]
+	}
+},
+{
+	"type": "Feature",
+	"properties": {
+		"geotop" : {
+			"nr" : "46",
+			"name" : "Zauberwald Ramsau"
+		},
+		"geocaches" : [{
+			"name": "The Magic Forest",
+			"code": "GC1Q1N2"
+		}]
+	},
+	"geometry": {
+		"type": "Point",
+		"coordinates": [12.85383333,47.6088]
+	}
+},
+{
+	"type": "Feature",
+	"properties": {
+		"geotop" : {
+			"nr" : "47",
+			"name" : "Schwarzes Moor"
+		},
+		"geocaches" : [{
+			"name": "The Black Moor",
+			"code": "GC1R1BN"
+		}]
+	},
+	"geometry": {
+		"type": "Point",
+		"coordinates": [10.07003333,50.52218333]
+	}
+},
+{
+	"type": "Feature",
+	"properties": {
+		"geotop" : {
+			"nr" : "48",
+			"name" : "Molasseprofil Eistobel"
+		},
+		"geocaches" : [{
+			"name": "Eistobel",
+			"code": "GC20DTJ"
+		}]
+	},
+	"geometry": {
+		"type": "Point",
+		"coordinates": [10.03206667,47.63575]
+	}
+},
+{
+	"type": "Feature",
+	"properties": {
+		"geotop" : {
+			"nr" : "49",
+			"name" : "Großer Lochstein"
+		},
+		"geocaches" : [{
+			"name": "Großer Lochstein",
+			"code": "GC21N76"
+		}]
+	},
+	"geometry": {
+		"type": "Point",
+		"coordinates": [11.52426667,49.7145]
+	}
+},
+{
+	"type": "Feature",
+	"properties": {
+		"geotop" : {
+			"nr" : "50",
+			"name" : "Serpentinit-Härtling am Föhrenbühl"
+		},
+		"geocaches" : [{
+			"name": "Föhrenbühl",
+			"code": "GC24KFQ"
+		}]
+	},
+	"geometry": {
+		"type": "Point",
+		"coordinates": [12.02848333,49.85696667]
+	}
+},
+{
+	"type": "Feature",
+	"properties": {
+		"geotop" : {
+			"nr" : "51",
+			"name" : "Malmschichten am Arzberg"
+		},
+		"geocaches" : [{
+			"name": "Malmschichten am Arzberg",
+			"code": "GC1W9VV"
+		}]
+	},
+	"geometry": {
+		"type": "Point",
+		"coordinates": [11.5395,49.01938333]
+	}
+},
+{
+	"type": "Feature",
+	"properties": {
+		"geotop" : {
+			"nr" : "52",
+			"name" : "Mühlsteinbruch Hinterhör"
+		},
+		"geocaches" : [{
+			"name": "Mühlsteinbruch / Millstone Quarry Hinterhör",
+			"code": "GC218GN"
+		}]
+	},
+	"geometry": {
+		"type": "Point",
+		"coordinates": [12.15636667,47.7781]
+	}
+},
+{
+	"type": "Feature",
+	"properties": {
+		"geotop" : {
+			"nr" : "53",
+			"name" : "Blockstrom Kaser Steinstuben"
+		},
+		"geocaches" : [{
+			"name": "Kaser Steinstuben / Kaser Stone Rooms",
+			"code": "GC21VP6"
+		}]
+	},
+	"geometry": {
+		"type": "Point",
+		"coordinates": [12.99931667,48.37646667]
+	}
+},
+{
+	"type": "Feature",
+	"properties": {
+		"geotop" : {
+			"nr" : "54",
+			"name" : "Drei-Brüder-Felsen"
+		},
+		"geocaches" : [{
+			"name": "Drei Brüder Felsen",
+			"code": "GC21N77"
+		}]
+	},
+	"geometry": {
+		"type": "Point",
+		"coordinates": [11.87178333,50.06925]
+	}
+},
+{
+	"type": "Feature",
+	"properties": {
+		"geotop" : {
+			"nr" : "55",
+			"name" : "Peitinger Pechkohle"
+		},
+		"geocaches" : [
+			{
+				"name": "Pechkohle/Bituminous coal - Peiting",
+				"code": "GC1Y451"
+			},
+			{
+				"name": "Peitinger Pechkohle",
+				"code": "GC1Y4B4",
+				"status": "archived"
+			}
+		],			
+	},
+	"geometry": {
+		"type": "Point",
+		"coordinates": [10.95506667,47.78788333]
+	}
+},
+{
+	"type": "Feature",
+	"properties": {
+		"geotop" : {
+			"nr" : "56",
+			"name" : "Schutzfelsen Pentling"
+		},
+		"geocaches" : [ {
+			"name": "Schutzfelsen Pentling",
+			"code": "GC1YG4X"
+		} ],
+	},
+	"geometry": {
+		"type": "Point",
+		"coordinates": [12.04631667,48.99223333]
+	}
+},
+{
+	"type": "Feature",
+	"properties": {
+		"geotop" : {
+			"nr" : "57",
+			"name" : "Schichtstufen am Schwanberg"
+		},
+		"geocaches" : [{
+			"name": "Keuper-Schichtstufe am Schwanberg",
+			"code": "GC1Y2TF"
+		}]
+	},
+	"geometry": {
+		"type": "Point",
+		"coordinates": [10.27408333,49.71475]
+	}
+},
+{
+	"type": "Feature",
+	"properties": {
+		"geotop" : {
+			"nr" : "58",
+			"name" : "Granite am Dreisessel"
+		},
+		"geocaches" : [{
+			"name": "Verwitterung am Dreisesselfels",
+			"code": "GC24CHQ"
+		}]
+	},
+	"geometry": {
+		"type": "Point",
+		"coordinates": [13.80368333,48.78093333]
+	}
+},
+{
+	"type": "Feature",
+	"properties": {
+		"geotop" : {
+			"nr" : "59",
+			"name" : "Glimmerschiefer am Osser"
+		},
+		"geocaches" : [{
+			"name": "Glimmerschiefer am Osser",
+			"code": "GC1YTWR"
+		}]
+	},
+	"geometry": {
+		"type": "Point",
+		"coordinates": [13.10968333,49.203]
+	}
+},
+{
+	"type": "Feature",
+	"properties": {
+		"geotop" : {
+			"nr" : "60",
+			"name" : "Wellheimer Trockental"
+		},
+		"geocaches" : [{
+			"name": "Wellheimer Trockental",
+			"code": "GC234MT"
+		}]
+	},
+	"geometry": {
+		"type": "Point",
+		"coordinates": [11.0841,48.82885]
+	}
+},
+{
+	"type": "Feature",
+	"properties": {
+		"geotop" : {
+			"nr" : "61",
+			"name" : "Höhlenruine Riesenburg"
+		},
+		"geocaches" : [{
+			"name": "Versturzhöhle Riesenburg",
+			"code": "GC1YTTV"
+		}]
+	},
+	"geometry": {
+		"type": "Point",
+		"coordinates": [11.29665,49.80366667]
+	}
+},
+{
+	"type": "Feature",
+	"properties": {
+		"geotop" : {
+			"nr" : "62",
+			"name" : "Zwölf-Apostel-Felsen"
+		},
+		"geocaches" : [{
+			"name": "12 Apostel im Altmühltal",
+			"code": "GC1RZK2"
+		}]
+	},
+	"geometry": {
+		"type": "Point",
+		"coordinates": [11.01141667,48.8925]
+	}
+},
+{
+	"type": "Feature",
+	"properties": {
+		"geotop" : {
+			"nr" : "63",
+			"name" : "Riesseekalke Hainsfarth"
+		},
+		"geocaches" : [{
+			"name": "Bayerns Geotope 63 - Riesseekalke Hainsfarth",
+			"code": "GC22YEM"
+		}]
+	},
+	"geometry": {
+		"type": "Point",
+		"coordinates": [10.63245,48.95523333]
+	}
+},
+{
+	"type": "Feature",
+	"properties": {
+		"geotop" : {
+			"nr" : "64",
+			"name" : "Steinachklamm"
+		},
+		"geocaches" : [{
+			"name": "Geotop Nr. 64 Steinachklamm",
+			"code": "GC22M5W"
+		}]
+	},
+	"geometry": {
+		"type": "Point",
+		"coordinates": [11.55633333,50.19358333]
+	}
+},
+{
+	"type": "Feature",
+	"properties": {
+		"geotop" : {
+			"nr" : "65",
+			"name" : "Kaolingruben bei Hirschau-Schnaittenbach"
+		},
+		"geocaches" : [{
+			"name": "Kaolingruben",
+			"code": "GC1VXKT"
+		}]
+	},
+	"geometry": {
+		"type": "Point",
+		"coordinates": [11.95328333,49.53546667]
+	}
+},
+{
+	"type": "Feature",
+	"properties": {
+		"geotop" : {
+			"nr" : "66",
+			"name" : "Tertiärwelt Aubenham"
+		},
+		"geocaches" : [{
+			"name": "Die tertiärwelten Aubenham",
+			"code": "GC24G1N"
+		}]
+	},
+	"geometry": {
+		"type": "Point",
+		"coordinates": [12.38118333,48.30541667]
+	}
+},
+{
+	"type": "Feature",
+	"properties": {
+		"geotop" : {
+			"nr" : "67",
+			"name" : "Stockheimer Steinkohle"
+		},
+		"geocaches" : [{
+			"name": "Stockheimer Steinkohle",
+			"code": "GC22C8Q"
+		}]
+	},
+	"geometry": {
+		"type": "Point",
+		"coordinates": [11.27215,50.31093333]
+	}
+},
+{
+	"type": "Feature",
+	"properties": {
+		"geotop" : {
+			"nr" : "68",
+			"name" : "Buckelwiesen bei Mittenwald"
+		},
+		"geocaches" : [{
+			"name": "Buckelwiesen bei Mittenwald",
+			"code": "GC25FHE"
+		}]
+	},
+	"geometry": {
+		"type": "Point",
+		"coordinates": [11.26956667,47.47073333]
+	}
+},
+{
+	"type": "Feature",
+	"properties": {
+		"geotop" : {
+			"nr" : "69",
+			"name" : "Doggerfelswand Niederhofen"
+		},
+		"geocaches" : [{
+			"name": "Doggerfelswand Niederhofen",
+			"code": "GC1WAMG"
+		}]
+	},
+	"geometry": {
+		"type": "Point",
+		"coordinates": [11.578,49.29216667]
+	}
+},
+{
+	"type": "Feature",
+	"properties": {
+		"geotop" : {
+			"nr" : "70",
+			"name" : "Flysch im Röthenbachtal"
+		},
+		"geocaches" : [{
+			"name": "Flysch im Röthenbachtal",
+			"code": "GC31HHE"
+		}]
+	},
+	"geometry": {
+		"type": "Point",
+		"coordinates": [10.85935,47.61221667]
+	}
+},
+{
+	"type": "Feature",
+	"properties": {
+		"geotop" : {
+			"nr" : "71",
+			"name" : "Fossilfundstelle Solnhofener Plattenkalke"
+		},
+		"geocaches" : [{
+			"name": "Solnhofener Plattenkalk",
+			"code": "GC1QD69"
+		}]
+	},
+	"geometry": {
+		"type": "Point",
+		"coordinates": [10.96138333,48.88941667]
+	}
+},
+{
+	"type": "Feature",
+	"properties": {
+		"geotop" : {
+			"nr" : "72",
+			"name" : "Volkacher Mainschleife"
+		},
+		"geocaches" : [{
+			"name": "Volkacher Mainschleife",
+			"code": "GC1RY5A"
+		}]
+	},
+	"geometry": {
+		"type": "Point",
+		"coordinates": [10.18296667,49.86665]
+	}
+},
+{
+	"type": "Feature",
+	"properties": {
+		"geotop" : {
+			"nr" : "73",
+			"name" : "Schlossberg Flossenbürg"
+		},
+		"geocaches" : [{
+			"name": "Flossenbürger Granit",
+			"code": "GC20EJH"
+		}]
+	},
+	"geometry": {
+		"type": "Point",
+		"coordinates": [12.34265,49.73395]
+	}
+},
+{
+	"type": "Feature",
+	"properties": {
+		"geotop" : {
+			"nr" : "74",
+			"name" : "Juraprofil Staffelberg"
+		},
+		"geocaches" : [{
+			"name": "Juraprofil Staffelberg",
+			"code": "GC218H2"
+		}]
+	},
+	"geometry": {
+		"type": "Point",
+		"coordinates": [11.02613333,50.09295]
+	}
+},
+{
+	"type": "Feature",
+	"properties": {
+		"geotop" : {
+			"nr" : "75",
+			"name" : "Kreidetransgression Obertrübenbach"
+		},
+		"geocaches" : [{
+			"name": "Geotop Obertrübenbach",
+			"code": "GC1YRNW"
+		}]
+	},
+	"geometry": {
+		"type": "Point",
+		"coordinates": [12.5466,49.16496667]
+	}
+},
+{
+	"type": "Feature",
+	"properties": {
+		"geotop" : {
+			"nr" : "76",
+			"name" : "Ammergauer Wetzsteinbrüche"
+		},
+		"geocaches" : [{
+			"name": "Schleifmühlklamm mit ehemaligen Wetzsteinbrüchen",
+			"code": "GC57547"
+		}]
+	},
+	"geometry": {
+		"type": "Point",
+		"coordinates": [11.01668333,47.60585]
+	}
+},
+{
+	"type": "Feature",
+	"properties": {
+		"geotop" : {
+			"nr" : "77",
+			"name" : "Nagelfluh am Hochgrat"
+		},
+	},
+	"geometry": {
+		"type": "Point",
+		"coordinates": [10.07326667,47.49321667]
+	}
+},
+{
+	"type": "Feature",
+	"properties": {
+		"geotop" : {
+			"nr" : "78",
+			"name" : "Sanddüne Seeholz Abensberg"
+		},
+		"geocaches" : [{
+			"name": "Geotop Sanddüne",
+			"code": "GC20FTW"
+		}]
+	},
+	"geometry": {
+		"type": "Point",
+		"coordinates": [11.88466667,48.81496667]
+	}
+},
+{
+	"type": "Feature",
+	"properties": {
+		"geotop" : {
+			"nr" : "79",
+			"name" : "Ruhpoldinger Marmor"
+		},
+		"geocaches" : [{
+			"name": "Ruhpoldinger Marmor",
+			"code": "GC1QC2C"
+		}]
+	},
+	"geometry": {
+		"type": "Point",
+		"coordinates": [12.62831667,47.74898333]
+	}
+},
+{
+	"type": "Feature",
+	"properties": {
+		"geotop" : {
+			"nr" : "80",
+			"name" : "Gneis am Hochfels"
+		},
+		"geocaches" : [{
+			"name": "Gneis am Hochfels",
+			"code": "GC1YZFJ"
+		}]
+	},
+	"geometry": {
+		"type": "Point",
+		"coordinates": [12.61738333,49.50755]
+	}
+},
+{
+	"type": "Feature",
+	"properties": {
+		"geotop" : {
+			"nr" : "81",
+			"name" : "Röslauschlucht Gsteinigt"
+		},
+		"geocaches" : [{
+			"name": "Earthcache: G'steinigt",
+			"code": "GC22YK9"
+		}]
+	},
+	"geometry": {
+		"type": "Point",
+		"coordinates": [12.18061667,50.05303333]
+	}
+},
+{
+	"type": "Feature",
+	"properties": {
+		"geotop" : {
+			"nr" : "82",
+			"name" : "Geologische Orgeln Oberschroffen"
+		},
+		"geocaches" : [{
+			"name": "Geological Organ Pipes",
+			"code": "GC1XQDJ"
+		}]
+	},
+	"geometry": {
+		"type": "Point",
+		"coordinates": [12.64705,48.154]
+	}
+},
+{
+	"type": "Feature",
+	"properties": {
+		"geotop" : {
+			"nr" : "83",
+			"name" : "Quaderkalkbruch Kleinochsenfurt"
+		},
+		"geocaches" : [{
+			"name": "Quaderkalkbruch Kleinochsenfurt",
+			"code": "GC29KTT"
+		}]
+	},
+	"geometry": {
+		"type": "Point",
+		"coordinates": [10.03985,49.68156667]
+	}
+},
+{
+	"type": "Feature",
+	"properties": {
+		"geotop" : {
+			"nr" : "84",
+			"name" : "Vulkankrater Gebirgsstein"
+		},
+		"geocaches" : [{
+			"name": "Vulkankrater Gebirgsstein",
+			"code": "GC20FP4"
+		}]
+	},
+	"geometry": {
+		"type": "Point",
+		"coordinates": [9.925983333,50.34226667]
+	}
+},
+{
+	"type": "Feature",
+	"properties": {
+		"geotop" : {
+			"nr" : "85",
+			"name" : "Mainauen bei Ziegelanger"
+		},
+		"geocaches" : [{
+			"name": "Mainauen bei Ziegelanger",
+			"code": "GC40W1N"
+		}]
+	},
+	"geometry": {
+		"type": "Point",
+		"coordinates": [10.61116667,49.9986]
+	}
+},
+{
+	"type": "Feature",
+	"properties": {
+		"geotop" : {
+			"nr" : "86",
+			"name" : "Werksandsteinbruch Höchberg"
+		},
+		"geocaches" : [{
+			"name": "Werksandsteinbruch Höchberg",
+			"code": "GC2ARDW"
+		}]
+	},
+	"geometry": {
+		"type": "Point",
+		"coordinates": [9.860916667,49.78366667]
+	}
+},
+{
+	"type": "Feature",
+	"properties": {
+		"geotop" : {
+			"nr" : "87",
+			"name" : "Sulzheimer Gipshügel"
+		},
+		"geocaches" : [{
+			"name": "Geotop ~Sulzheimer Gipshügel~",
+			"code": "GC2E826"
+		}]
+	},
+	"geometry": {
+		"type": "Point",
+		"coordinates": [10.31753333,49.95303333]
+	}
+},
+{
+	"type": "Feature",
+	"properties": {
+		"geotop" : {
+			"nr" : "88",
+			"name" : "Helvetikum bei Burgberg"
+		},
+		"geocaches" : [{
+			"name": "Helvetikum am Grünten",
+			"code": "GC2AB3G"
+		}]
+	},
+	"geometry": {
+		"type": "Point",
+		"coordinates": [10.28231667,47.54556667]
+	}
+},
+{
+	"type": "Feature",
+	"properties": {
+		"geotop" : {
+			"nr" : "89",
+			"name" : "Granitzentrum in Hauzenberg"
+		},
+		"geocaches" : [{
+			"name": "Granitzentrum in Hauzenberg",
+			"code": "GC5MFPR"
+		}]
+	},
+	"geometry": {
+		"type": "Point",
+		"coordinates": [13.62176667,48.64763333]
+	}
+},
+{
+	"type": "Feature",
+	"properties": {
+		"geotop" : {
+			"nr" : "90",
+			"name" : "Seltenbachschlucht bei Klingenberg am Main"
+		},
+		"geocaches" : [{
+			"name": "Bayerns schönste Geotope 90 - Seltenbachschlucht",
+			"code": "GC33R8T"
+		}]
+	},
+	"geometry": {
+		"type": "Point",
+		"coordinates": [9.187716667,49.78353333]
+	}
+},
+{
+	"type": "Feature",
+	"properties": {
+		"geotop" : {
+			"nr" : "91",
+			"name" : "Bodenbildungen am Heusterzbühl"
+		},
+		"geocaches" : [{
+			"name": "Earthcache: Heusterzbühl",
+			"code": "GC2AGW7"
+		}]
+	},
+	"geometry": {
+		"type": "Point",
+		"coordinates": [12.26788333,49.90331667]
+	}
+},
+{
+	"type": "Feature",
+	"properties": {
+		"geotop" : {
+			"nr" : "92",
+			"name" : "Marmorbruch Unterwappenöst"
+		},
+		"geocaches" : [{
+			"name": "GEOPARK Bayern-Böhmen: Marmorbruch Unterwappenöst",
+			"code": "GC3GD7W"
+		}]
+	},
+	"geometry": {
+		"type": "Point",
+		"coordinates": [11.92431667,49.9109]
+	}
+},
+{
+	"type": "Feature",
+	"properties": {
+		"geotop" : {
+			"nr" : "93",
+			"name" : "Wildflusslandschaft Isartal"
+		},
+	},
+	"geometry": {
+		"type": "Point",
+		"coordinates": [11.35635,47.54263333]
+	}
+},
+{
+	"type": "Feature",
+	"properties": {
+		"geotop" : {
+			"nr" : "94",
+			"name" : "Fossiliengrube Mistelgau"
+		},
+		"geocaches" : [{
+			"name": "Fossiliengrube Mistelgau",
+			"code": "GC3GWCA"
+		}]
+	},
+	"geometry": {
+		"type": "Point",
+		"coordinates": [11.46613333,49.90493333]
+	}
+},
+{
+	"type": "Feature",
+	"properties": {
+		"geotop" : {
+			"nr" : "95",
+			"name" : "Historische Steinbrüche Wernsbach"
+		},
+		"geocaches" : [{
+			"name": "Historische Steinbrüche Wernsbach",
+			"code": "GC2HETN"
+		}]
+	},
+	"geometry": {
+		"type": "Point",
+		"coordinates": [11.0837,49.17475]
+	}
+},
+{
+	"type": "Feature",
+	"properties": {
+		"geotop" : {
+			"nr" : "96",
+			"name" : "Bogenberg"
+		},
+		"geocaches" : [{
+			"name": "Der Bogenberg",
+			"code": "GC2HKW8"
+		}]
+	},
+	"geometry": {
+		"type": "Point",
+		"coordinates": [12.69596667,48.90225]
+	}
+},
+{
+	"type": "Feature",
+	"properties": {
+		"geotop" : {
+			"nr" : "97",
+			"name" : "Schieferkohle am Uhlenberg"
+		},
+		"geocaches" : [{
+			"name": "Schwarzer Dreck",
+			"code": "GC2HGVV"
+		}]
+	},
+	"geometry": {
+		"type": "Point",
+		"coordinates": [10.61165,48.36991667]
+	}
+},
+{
+	"type": "Feature",
+	"properties": {
+		"geotop" : {
+			"nr" : "98",
+			"name" : "Saurierfährten Euerdorf"
+		},
+		"geocaches" : [{
+			"name": "Geotop Saurierfährten Euerdorf",
+			"code": "GC2XHBF"
+		}]
+	},
+	"geometry": {
+		"type": "Point",
+		"coordinates": [10.0389,50.16328333]
+	}
+},
+{
+	"type": "Feature",
+	"properties": {
+		"geotop" : {
+			"nr" : "99",
+			"name" : "Wackersdorfer Braunkohle"
+		},
+		"geocaches" : [{
+			"name": "Wackersdorfer Braunkohle",
+			"code": "GC319KA"
+		}]
+	},
+	"geometry": {
+		"type": "Point",
+		"coordinates": [12.17096667,49.3007]
+	}
+},
+{
+	"type": "Feature",
+	"properties": {
+		"geotop" : {
+			"nr" : "100",
+			"name" : "Watzmann-Ostwand mit Eiskapelle"
+		},
+		"geocaches" : [{
+			"name": "Eiskapelle",
+			"code": "GC1VY1D"
+		}]
+	},
+	"geometry": {
+		"type": "Point",
+		"coordinates": [12.97025,47.54546667]
+	}
+}
+
+];

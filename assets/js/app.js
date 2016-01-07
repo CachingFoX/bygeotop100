@@ -17,6 +17,7 @@ if ( !("ontouchstart" in window) ) {
 
 $(document).on("mouseout", ".feature-row", clearHighlight);
 
+
 $("#about-btn").click(function() {
   $("#aboutModal").modal("show");
   $(".navbar-collapse.in").collapse("hide");
@@ -46,6 +47,8 @@ $("#list-btn").click(function() {
   map.invalidateSize();
   return false;
 });
+
+
 
 $("#nav-btn").click(function() {
   $(".navbar-collapse").collapse("toggle");
@@ -370,7 +373,7 @@ $.getJSON("data/DOITT_MUSEUM_01_13SEPT2010.geojson", function (data) {
 
 map = L.map("map", {
   zoom: 10,
-  center: [40.702222, -73.979378],
+  center: [48.94655556, 11.40447222],
   layers: [mapquestOSM, boroughs, markerClusters, highlight],
   zoomControl: false,
   attributionControl: false
