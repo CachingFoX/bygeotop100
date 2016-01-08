@@ -44,8 +44,8 @@ function clearHighlight() {
 }
 
 function sidebarClick(id) {
-  var layer = markerClusters.getLayer(id);
-  map.setView([layer.getLatLng().lat, layer.getLatLng().lng], 17);
+  var object = map._layers[id];
+  map.setView([object.getLatLng().lat, object.getLatLng().lng], 17);
   layer.fire("click");
   /* Hide sidebar and go to the map on small screens */
   if (document.body.clientWidth <= 767) {
@@ -58,7 +58,7 @@ function syncSidebar() {
   /* Empty sidebar features */
   $("#feature-list tbody").empty();
   /* Loop through earthcaches layer and add only features which are in the map bounds */
-  if (map.hasLayer(earthcacheLayer)) {
+  if (map.hasLayer(earthcaches)) {
 	earthcaches.eachLayer(function (layer) {
       if (map.getBounds().contains(layer.getLatLng())) {
         $("#feature-list tbody").append('<tr class="feature-row" id="' + L.stamp(layer) + '" lat="' + layer.getLatLng().lat + '" lng="' + layer.getLatLng().lng + '"><td style="vertical-align: middle;"><img width="20" height="23" src="assets/img/earthcache.png"></td><td class="feature-name">' + layer.feature.properties.NAME + '<br><span class="feature-subname">Geotop Nummer '+layer.feature.properties.NUMBER+'<br>'+layer.feature.properties.CODE+'</span></td><td style="vertical-align: middle;"><i class="fa fa-chevron-right pull-right"></i></td></tr>');
@@ -66,7 +66,7 @@ function syncSidebar() {
     });
   }
   /* Loop through geotops layer and add only features which are in the map bounds */
-  if (map.hasLayer(geotopLayer)) {
+  if (map.hasLayer(geotops)) {
 	geotops.eachLayer(function (layer) {
       if (map.getBounds().contains(layer.getLatLng())) {
         $("#feature-list tbody").append('<tr class="feature-row" id="' + L.stamp(layer) + '" lat="' + layer.getLatLng().lat + '" lng="' + layer.getLatLng().lng + '"><td style="vertical-align: middle;"><img width="20" height="23" src="assets/img/geotop.png"></td><td class="feature-name">' + layer.feature.properties.NAME + '<br><span class="feature-subname">Geotop Nummer '+layer.feature.properties.NUMBER+'</span></td><td style="vertical-align: middle;"><i class="fa fa-chevron-right pull-right"></i></td></tr>');
@@ -150,16 +150,6 @@ var highlightStyle = {
   radius: 10
 };
 
-/* Single marker cluster layer to hold all clusters */
-var markerClusters = new L.MarkerClusterGroup({
-  spiderfyOnMaxZoom: true,
-  showCoverageOnHover: false,
-  zoomToBoundsOnClick: true,
-  disableClusteringAtZoom: 16
-});
-
-/* Empty layer placeholder to add to layer control for listening when to add/remove earthcaches to markerClusters layer */
-var earthcacheLayer = L.geoJson(null);
 var earthcaches = L.geoJson(null, {
   pointToLayer: function (feature, latlng) {
     return L.marker(latlng, {
@@ -198,11 +188,9 @@ var earthcaches = L.geoJson(null, {
 });
 $.getJSON("data/ByTop100Earthcaches.geojson", function (data) {
   earthcaches.addData(data);
-  map.addLayer(earthcacheLayer);
+  map.addLayer(earthcaches);
 });
 
-/* Empty layer placeholder to add to layer control for listening when to add/remove geotops to markerClusters layer */
-var geotopLayer = L.geoJson(null);
 var geotops = L.geoJson(null, {
   pointToLayer: function (feature, latlng) {
     return L.marker(latlng, {
@@ -241,7 +229,7 @@ var geotops = L.geoJson(null, {
 });
 $.getJSON("data/ByTop100Geotops.geojson", function (data) {
   geotops.addData(data);
-  map.addLayer(geotopLayer);
+  map.addLayer(geotops);
 });
 
 
@@ -250,42 +238,18 @@ $.getJSON("data/ByTop100Geotops.geojson", function (data) {
 map = L.map("map", {
   zoom: 8,
   center: [48.94655556, 11.40447222],
-  layers: [mapLayerMapnik, markerClusters, highlight],
+  layers: [mapLayerMapnik, highlight],
   zoomControl: false,
   attributionControl: false
 });
 
-/* Layer control listeners that allow for a single markerClusters layer */
+
 map.on("overlayadd", function(e) {
-  if (e.layer === earthcacheLayer) {
-	if ( $("#cluster-btn-icon").attr('class') == "square-o" ) {
-		map.addLayer(earthcaches);
-	} else {
-		markerClusters.addLayer(earthcaches);
-	}	  	
-    syncSidebar();
-  }
-  if (e.layer === geotopLayer) {  
-	if ( $("#cluster-btn-icon").attr('class') == "square-o" ) {
-		map.addLayer(geotops);
-	} else {
-		markerClusters.addLayer(geotops);
-	}	  
-    syncSidebar();
-  }
+  syncSidebar();
 });
 
 map.on("overlayremove", function(e) {
-  if (e.layer === earthcacheLayer) {
-    markerClusters.removeLayer(earthcaches);
-	map.removeLayer(earthcaches);
-    syncSidebar();
-  }
-  if (e.layer === geotopLayer) {
-    markerClusters.removeLayer(geotops);
-	map.removeLayer(geotops);
-    syncSidebar();
-  }
+  syncSidebar();
 });
 
 /* Filter sidebar feature list to only show features in current map bounds */
@@ -375,8 +339,8 @@ var baseLayers = {
 
 var groupedOverlays = {
   "Points of Interest": {
-    "<img src='assets/img/geotop.png' width='20' height='23'>&nbsp;Geotope": geotopLayer,
-	"<img src='assets/img/earthcache.png' width='20' height='23'>&nbsp;Earthcaches": earthcacheLayer
+    "<img src='assets/img/geotop.png' width='20' height='23'>&nbsp;Geotope": geotops,
+	"<img src='assets/img/earthcache.png' width='20' height='23'>&nbsp;Earthcaches": earthcaches
   },
   "Höhen" : {
 	"Schatten": mapLayerHillshadow,
