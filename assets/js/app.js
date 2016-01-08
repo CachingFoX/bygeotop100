@@ -394,23 +394,32 @@ map = L.map("map", {
 /* Layer control listeners that allow for a single markerClusters layer */
 map.on("overlayadd", function(e) {
   if (e.layer === earthcacheLayer) {
-    markerClusters.addLayer(theaters);
+	if ( $("#cluster-btn-icon").attr('class') == "square-o" ) {
+		map.addLayer(earthcaches);
+	} else {
+		markerClusters.addLayer(earthcaches);
+	}	  	
     syncSidebar();
   }
-  if (e.layer === geotopLayer) {
-    markerClusters.addLayer(geotops);
-	// TODO: no clusters: map.addLayer(geotops)
+  if (e.layer === geotopLayer) {  
+	if ( $("#cluster-btn-icon").attr('class') == "square-o" ) {
+		map.addLayer(geotops);
+	} else {
+		markerClusters.addLayer(geotops);
+	}	  
     syncSidebar();
   }
 });
 
 map.on("overlayremove", function(e) {
-  if (e.layer === theaterLayer) {
-    markerClusters.removeLayer(theaters);
+  if (e.layer === earthcacheLayer) {
+    markerClusters.removeLayer(earthcaches);
+	map.removeLayer(earthcaches);
     syncSidebar();
   }
   if (e.layer === geotopLayer) {
     markerClusters.removeLayer(geotops);
+	map.removeLayer(geotops);
     syncSidebar();
   }
 });
@@ -511,6 +520,8 @@ var groupedOverlays = {
 	"Linien (ASTER)": mapLayerASTERContours
   }
 };
+
+
 
 var layerControl = L.control.groupedLayers(baseLayers, groupedOverlays, {
   collapsed: isCollapsed

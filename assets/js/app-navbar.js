@@ -29,3 +29,13 @@ $("#list-btn").click(function() {
   return false;
 });
 
+$("#cluster-btn").click(function() {
+	if ( $("#cluster-btn-icon").attr('class') == "square-o" ) {
+		$("#cluster-btn-icon").attr('class', "fa fa-check");
+	} else {
+		$("#cluster-btn-icon").attr('class', "square-o");
+	}
+	markerClusters.clearLayers();
+	syncSidebar();
+});
+
