@@ -57,9 +57,9 @@ function sidebarClick(id) {
 function syncSidebar() {
   /* Empty sidebar features */
   $("#feature-list tbody").empty();
-  /* Loop through theaters layer and add only features which are in the map bounds */
-  theaters.eachLayer(function (layer) {
-    if (map.hasLayer(theaterLayer)) {
+  /* Loop through earthcaches layer and add only features which are in the map bounds */
+  earthcaches.eachLayer(function (layer) {
+    if (map.hasLayer(earthcacheLayer)) {
       if (map.getBounds().contains(layer.getLatLng())) {
         $("#feature-list tbody").append('<tr class="feature-row" id="' + L.stamp(layer) + '" lat="' + layer.getLatLng().lat + '" lng="' + layer.getLatLng().lng + '"><td style="vertical-align: middle;"><img width="20" height="23" src="assets/img/earthcache.png"></td><td class="feature-name">' + layer.feature.properties.NAME + '<br><span class="feature-subname">Geotop Nummer '+layer.feature.properties.NUMBER+'<br>'+layer.feature.properties.CODE+'</span></td><td style="vertical-align: middle;"><i class="fa fa-chevron-right pull-right"></i></td></tr>');
       }
@@ -139,6 +139,7 @@ var mapLayerWmfLabsBwMapnik = L.tileLayer('http://{s}.tiles.wmflabs.org/bw-mapni
 	subdomains: ["a","b","c"],
 	attribution: 'hillshadow \u00a9 <a href="http://a.tiles.wmflabs.org/" target=\'_blank\'>a.tiles.wmflabs.org</a>'
 });	
+
 
 /* Overlay Layers */
 var highlight = L.geoJson(null);
@@ -293,9 +294,9 @@ var markerClusters = new L.MarkerClusterGroup({
   disableClusteringAtZoom: 16
 });
 
-/* Empty layer placeholder to add to layer control for listening when to add/remove theaters to markerClusters layer */
-var theaterLayer = L.geoJson(null);
-var theaters = L.geoJson(null, {
+/* Empty layer placeholder to add to layer control for listening when to add/remove earthcaches to markerClusters layer */
+var earthcacheLayer = L.geoJson(null);
+var earthcaches = L.geoJson(null, {
   pointToLayer: function (feature, latlng) {
     return L.marker(latlng, {
       icon: L.icon({
@@ -332,8 +333,8 @@ var theaters = L.geoJson(null, {
   }
 });
 $.getJSON("data/ByTop100Earthcaches.geojson", function (data) {
-  theaters.addData(data);
-  map.addLayer(theaterLayer);
+  earthcaches.addData(data);
+  map.addLayer(earthcacheLayer);
 });
 
 /* Empty layer placeholder to add to layer control for listening when to add/remove geotops to markerClusters layer */
@@ -392,7 +393,7 @@ map = L.map("map", {
 
 /* Layer control listeners that allow for a single markerClusters layer */
 map.on("overlayadd", function(e) {
-  if (e.layer === theaterLayer) {
+  if (e.layer === earthcacheLayer) {
     markerClusters.addLayer(theaters);
     syncSidebar();
   }
@@ -645,8 +646,8 @@ $(document).one("ajaxStop", function () {
       map.fitBounds(datum.bounds);
     }
     if (datum.source === "Theaters") {
-      if (!map.hasLayer(theaterLayer)) {
-        map.addLayer(theaterLayer);
+      if (!map.hasLayer(earthcacheLayer)) {
+        map.addLayer(earthcacheLayer);
       }
       map.setView([datum.lat, datum.lng], 17);
       if (map._layers[datum.id]) {
