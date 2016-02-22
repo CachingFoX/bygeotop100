@@ -168,7 +168,7 @@ var earthcaches = L.geoJson(null, {
       var content = "<table class='table table-striped table-bordered table-condensed'>" + "<tr><th>Name</th><td>" + feature.properties.NAME + "</td></tr>" + "<tr><th>Website</th><td><a class='url-break' href='http://coord.info/" + feature.properties.CODE + "' target='_blank'>http://coord.info/" + feature.properties.CODE + "</a></td></tr>" + "<table>";
       layer.on({
         click: function (e) {
-          $("#feature-title").html('<img width="20" height="23" src="assets/img/geotop.png">&nbsp;'+feature.properties.NAME);
+          $("#feature-title").html('<img width="20" height="23" src="assets/img/earthcache.png">&nbsp;'+feature.properties.NAME);
           $("#feature-info").html(content);
           $("#featureModal").modal("show");
           highlight.clearLayers().addLayer(L.circleMarker([feature.geometry.coordinates[1], feature.geometry.coordinates[0]], highlightStyle));
