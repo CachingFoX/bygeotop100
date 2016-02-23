@@ -1,4 +1,4 @@
-var map, featureList, theaterSearch = [], museumSearch = [];
+var map, featureList, earthcacheSearch = [], museumSearch = [];
 
 $(window).resize(function() {
   sizeLayerControl();
@@ -116,7 +116,7 @@ var earthcaches = L.geoJson(null, {
         }
       });
       $("#feature-list tbody").append('<tr class="feature-row" id="' + L.stamp(layer) + '" lat="' + layer.getLatLng().lat + '" lng="' + layer.getLatLng().lng + '"><td style="vertical-align: middle;"><img width="16" height="18" src="assets/img/earthcache.png"></td><td class="feature-name">' + layer.feature.properties.NAME + '</td><td style="vertical-align: middle;"><i class="fa fa-chevron-right pull-right"></i></td></tr>');
-      theaterSearch.push({
+      earthcacheSearch.push({
         name: layer.feature.properties.NAME,
         address: layer.feature.properties.CODE,
         source: "earthcache",
@@ -306,13 +306,13 @@ $(document).one("ajaxStop", function () {
   featureList = new List("features", {valueNames: ["feature-name"]});
   featureList.sort("feature-name", {order:"asc"});
 
-  var theatersBH = new Bloodhound({
-    name: "Theaters",
+  var earthcacheBH = new Bloodhound({
+    name: "earthcache",
     datumTokenizer: function (d) {
       return Bloodhound.tokenizers.whitespace(d.name);
     },
     queryTokenizer: Bloodhound.tokenizers.whitespace,
-    local: theaterSearch,
+    local: earthcacheSearch,
     limit: 10
   });
 
@@ -326,7 +326,7 @@ $(document).one("ajaxStop", function () {
     limit: 10
   });
 
-  theatersBH.initialize();
+  earthcacheBH.initialize();
   museumsBH.initialize();
 
   /* instantiate the typeahead UI */
@@ -335,9 +335,9 @@ $(document).one("ajaxStop", function () {
     highlight: true,
     hint: false
   }, {
-    name: "Theaters",
+    name: "earthcache",
     displayKey: "name",
-    source: theatersBH.ttAdapter(),
+    source: earthcacheBH.ttAdapter(),
     templates: {
       header: "<h4 class='typeahead-header'><img src='assets/img/earthcache.png' width='20' height='23'>&nbsp;Earthcaches</h4>",
       suggestion: Handlebars.compile(["{{name}}<br>&nbsp;<small>{{address}}</small>"].join(""))
