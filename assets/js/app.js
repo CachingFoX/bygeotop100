@@ -1,4 +1,4 @@
-var map, featureList, boroughSearch = [], theaterSearch = [], museumSearch = [];
+var map, featureList, theaterSearch = [], museumSearch = [];
 
 $(window).resize(function() {
   sizeLayerControl();
@@ -303,20 +303,8 @@ $("#featureModal").on("hidden.bs.modal", function (e) {
 $(document).one("ajaxStop", function () {
   $("#loading").hide();
   sizeLayerControl();
-  /* Fit map to boroughs bounds */
-  // map.fitBounds(boroughs.getBounds());
   featureList = new List("features", {valueNames: ["feature-name"]});
   featureList.sort("feature-name", {order:"asc"});
-
-  var boroughsBH = new Bloodhound({
-    name: "Boroughs",
-    datumTokenizer: function (d) {
-      return Bloodhound.tokenizers.whitespace(d.name);
-    },
-    queryTokenizer: Bloodhound.tokenizers.whitespace,
-    local: boroughSearch,
-    limit: 10
-  });
 
   var theatersBH = new Bloodhound({
     name: "Theaters",
@@ -338,7 +326,6 @@ $(document).one("ajaxStop", function () {
     limit: 10
   });
 
-  boroughsBH.initialize();
   theatersBH.initialize();
   museumsBH.initialize();
 
@@ -347,13 +334,6 @@ $(document).one("ajaxStop", function () {
     minLength: 3,
     highlight: true,
     hint: false
-  }, {
-    name: "Boroughs",
-    displayKey: "name",
-    source: boroughsBH.ttAdapter(),
-    templates: {
-      header: "<h4 class='typeahead-header'>Boroughs</h4>"
-    }
   }, {
     name: "Theaters",
     displayKey: "name",
@@ -371,9 +351,6 @@ $(document).one("ajaxStop", function () {
       suggestion: Handlebars.compile(["{{name}}<br>&nbsp;<small>{{address}}</small>"].join(""))
     }
   }).on("typeahead:selected", function (obj, datum) {
-    if (datum.source === "Boroughs") {
-      map.fitBounds(datum.bounds);
-    }
     if (datum.source === "earthcache") {
       if (!map.hasLayer(earthcaches)) {
         map.addLayer(earthcaches);
