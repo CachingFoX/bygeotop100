@@ -118,7 +118,7 @@ var earthcaches = L.geoJson(null, {
       $("#feature-list tbody").append('<tr class="feature-row" id="' + L.stamp(layer) + '" lat="' + layer.getLatLng().lat + '" lng="' + layer.getLatLng().lng + '"><td style="vertical-align: middle;"><img width="16" height="18" src="assets/img/earthcache.png"></td><td class="feature-name">' + layer.feature.properties.NAME + '</td><td style="vertical-align: middle;"><i class="fa fa-chevron-right pull-right"></i></td></tr>');
       theaterSearch.push({
         name: layer.feature.properties.NAME,
-        address: layer.feature.properties.ADDRESS1,
+        address: layer.feature.properties.CODE,
         source: "earthcache",
         id: L.stamp(layer),
         lat: layer.feature.geometry.coordinates[1],
@@ -159,7 +159,7 @@ var geotops = L.geoJson(null, {
       $("#feature-list tbody").append('<tr class="feature-row" id="' + L.stamp(layer) + '" lat="' + layer.getLatLng().lat + '" lng="' + layer.getLatLng().lng + '"><td style="vertical-align: middle;"><img width="20" height="23" src="assets/img/geotop.png"></td><td class="feature-name">' + layer.feature.properties.NAME + '</td><td style="vertical-align: middle;"><i class="fa fa-chevron-right pull-right"></i></td></tr>');
       museumSearch.push({
         name: layer.feature.properties.NAME,
-        address: layer.feature.properties.ADRESS1,
+        address: "Geotop #"+layer.feature.properties.NUMBER,
         source: "geotop",
         id: L.stamp(layer),
         lat: layer.feature.geometry.coordinates[1],
