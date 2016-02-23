@@ -119,7 +119,7 @@ var earthcaches = L.geoJson(null, {
       theaterSearch.push({
         name: layer.feature.properties.NAME,
         address: layer.feature.properties.ADDRESS1,
-        source: "Theaters",
+        source: "earthcache",
         id: L.stamp(layer),
         lat: layer.feature.geometry.coordinates[1],
         lng: layer.feature.geometry.coordinates[0]
@@ -160,7 +160,7 @@ var geotops = L.geoJson(null, {
       museumSearch.push({
         name: layer.feature.properties.NAME,
         address: layer.feature.properties.ADRESS1,
-        source: "geotops",
+        source: "geotop",
         id: L.stamp(layer),
         lat: layer.feature.geometry.coordinates[1],
         lng: layer.feature.geometry.coordinates[0]
@@ -412,7 +412,7 @@ $(document).one("ajaxStop", function () {
     if (datum.source === "Boroughs") {
       map.fitBounds(datum.bounds);
     }
-    if (datum.source === "Theaters") {
+    if (datum.source === "earthcache") {
       if (!map.hasLayer(earthcacheLayer)) {
         map.addLayer(earthcacheLayer);
       }
@@ -421,7 +421,7 @@ $(document).one("ajaxStop", function () {
         map._layers[datum.id].fire("click");
       }
     }
-    if (datum.source === "geotops") {
+    if (datum.source === "geotop") {
       if (!map.hasLayer(geotopLayer)) {
         map.addLayer(geotopLayer);
       }
