@@ -398,7 +398,7 @@ $(document).one("ajaxStop", function () {
     displayKey: "name",
     source: museumsBH.ttAdapter(),
     templates: {
-      header: "<h4 class='typeahead-header'><img src='assets/img/geotop.png' width='20' height='23'>&nbsp;geotops</h4>",
+      header: "<h4 class='typeahead-header'><img src='assets/img/geotop.png' width='20' height='23'>&nbsp;Geotope</h4>",
       suggestion: Handlebars.compile(["{{name}}<br>&nbsp;<small>{{address}}</small>"].join(""))
     }
   }, {
