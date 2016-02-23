@@ -413,8 +413,8 @@ $(document).one("ajaxStop", function () {
       map.fitBounds(datum.bounds);
     }
     if (datum.source === "earthcache") {
-      if (!map.hasLayer(earthcacheLayer)) {
-        map.addLayer(earthcacheLayer);
+      if (!map.hasLayer(earthcaches)) {
+        map.addLayer(earthcaches);
       }
       map.setView([datum.lat, datum.lng], 17);
       if (map._layers[datum.id]) {
@@ -422,8 +422,8 @@ $(document).one("ajaxStop", function () {
       }
     }
     if (datum.source === "geotop") {
-      if (!map.hasLayer(geotopLayer)) {
-        map.addLayer(geotopLayer);
+      if (!map.hasLayer(geotops)) {
+        map.addLayer(geotops);
       }
       map.setView([datum.lat, datum.lng], 17);
       if (map._layers[datum.id]) {
