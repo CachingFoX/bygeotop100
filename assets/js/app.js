@@ -390,7 +390,7 @@ $(document).one("ajaxStop", function () {
     displayKey: "name",
     source: theatersBH.ttAdapter(),
     templates: {
-      header: "<h4 class='typeahead-header'><img src='assets/img/earthcache.png' width='24' height='28'>&nbsp;Earthcaches</h4>",
+      header: "<h4 class='typeahead-header'><img src='assets/img/earthcache.png' width='20' height='23'>&nbsp;Earthcaches</h4>",
       suggestion: Handlebars.compile(["{{name}}<br>&nbsp;<small>{{address}}</small>"].join(""))
     }
   }, {
@@ -398,7 +398,7 @@ $(document).one("ajaxStop", function () {
     displayKey: "name",
     source: museumsBH.ttAdapter(),
     templates: {
-      header: "<h4 class='typeahead-header'><img src='assets/img/geotop.png' width='24' height='28'>&nbsp;geotops</h4>",
+      header: "<h4 class='typeahead-header'><img src='assets/img/geotop.png' width='20' height='23'>&nbsp;geotops</h4>",
       suggestion: Handlebars.compile(["{{name}}<br>&nbsp;<small>{{address}}</small>"].join(""))
     }
   }, {
