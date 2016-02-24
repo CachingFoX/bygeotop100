@@ -116,9 +116,19 @@ var earthcaches = L.geoJson(null, {
         }
       });
       $("#feature-list tbody").append('<tr class="feature-row" id="' + L.stamp(layer) + '" lat="' + layer.getLatLng().lat + '" lng="' + layer.getLatLng().lng + '"><td style="vertical-align: middle;"><img width="16" height="18" src="assets/img/earthcache.png"></td><td class="feature-name">' + layer.feature.properties.NAME + '</td><td style="vertical-align: middle;"><i class="fa fa-chevron-right pull-right"></i></td></tr>');
+	  
+	  var searchtokens;
+	  if ( layer.feature.properties.searchtokens ) {
+		  searchtokens = layer.feature.properties.searchtokens;
+	  }
+	  
       earthcacheSearch.push({
         name: layer.feature.properties.NAME,
-        address: layer.feature.properties.CODE,
+        address: "Geotop #"+layer.feature.properties.NUMBER+" "+layer.feature.properties.GEOTOPNAME,
+		gccode: layer.feature.properties.CODE,
+		searchtokens : searchtokens,
+		geotopname: layer.feature.properties.GEOTOPNAME,	
+		geotopnumber: layer.feature.properties.NUMBER,
         source: "earthcache",
         id: L.stamp(layer),
         lat: layer.feature.geometry.coordinates[1],
@@ -309,7 +319,11 @@ $(document).one("ajaxStop", function () {
   var earthcacheBH = new Bloodhound({
     name: "earthcache",
     datumTokenizer: function (d) {
-      return Bloodhound.tokenizers.whitespace(d.name);
+      var tokens1 = Bloodhound.tokenizers.whitespace(d.name);
+	  var tokens2 = Bloodhound.tokenizers.whitespace(d.searchtokens);
+	  var tokens3 = Bloodhound.tokenizers.whitespace(d.geotopname);
+	  var tokens = tokens1.concat(tokens2).concat(tokens3);
+	  return tokens;
     },
     queryTokenizer: Bloodhound.tokenizers.whitespace,
     local: earthcacheSearch,
@@ -321,7 +335,11 @@ $(document).one("ajaxStop", function () {
     datumTokenizer: function (d) {
       return Bloodhound.tokenizers.whitespace(d.name);
     },
-    queryTokenizer: Bloodhound.tokenizers.whitespace,
+    queryTokenizer: function (d) {
+		var tokens = Bloodhound.tokenizers.whitespace(d);
+		console.log( tokens );
+		return tokens;
+	},
     local: museumSearch,
     limit: 10
   });
@@ -331,16 +349,16 @@ $(document).one("ajaxStop", function () {
 
   /* instantiate the typeahead UI */
   $("#searchbox").typeahead({
-    minLength: 3,
+    minLength: 1,
     highlight: true,
-    hint: false
+    hint: true
   }, {
     name: "earthcache",
     displayKey: "name",
     source: earthcacheBH.ttAdapter(),
     templates: {
       header: "<h4 class='typeahead-header'><img src='assets/img/earthcache.png' width='20' height='23'>&nbsp;Earthcaches</h4>",
-      suggestion: Handlebars.compile(["{{name}}<br>&nbsp;<small>{{address}}</small>"].join(""))
+      suggestion: Handlebars.compile(["{{name}}&nbsp;({{gccode}})<br><small>&nbsp;Geotop #{{geotopnumber}} {{geotopname}}<br>&nbsp;Tags: {{searchtokens}}</small>"].join(""))
     }
   }, {
     name: "geotops",
