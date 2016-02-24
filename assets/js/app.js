@@ -96,8 +96,43 @@ var highlightStyle = {
   radius: 10
 };
 
+var dataGeotops = {};
+var dataEarthcaches = {};
+
+function loadData() {
+$.getJSON("data/geotops.json", function (data) {
+  dataGeotops = data.features;
+});
+$.getJSON("data/earthcaches.json", function (data) {
+  dataEarthcaches = data.features;
+});
+$.getJSON("data/geotops.geojson", function (data) {
+  geotops.addData(data);
+  map.addLayer(geotops);
+});
+$.getJSON("data/earthcaches.geojson", function (data) {
+  earthcaches.addData(data);
+  map.addLayer(earthcaches);
+});
+}
+
+loadData();
+
+
 var earthcaches = L.geoJson(null, {
   pointToLayer: function (feature, latlng) {
+	  
+    if (!feature.properties) {
+		alert("no feature.properties (geotop)");
+	}  
+	
+	// TODO id is not the index - this is a hack!
+	var index = feature.properties.refId;
+	var objEarthcache = dataEarthcaches[index-1];
+	if ( objEarthcache.id != feature.properties.refId ) {
+		alert( "Earthcaches: id mismatch "+objEarthcache.id+" "+feature.properties.refId);
+	}
+	  
     return L.marker(latlng, {
       icon: L.icon({
         iconUrl: "assets/img/earthcache.png",
@@ -105,41 +140,50 @@ var earthcaches = L.geoJson(null, {
         iconAnchor: [10, 23],
         popupAnchor: [0, -25]
       }),
-      title: "N/A",  // XXX feature.properties.NAME,
+      title: objEarthcache.name, 
       riseOnHover: true
     });
   },
   onEachFeature: function (feature, layer) {
-    if (feature.properties) {
-	  var name = "N/A"; // XXX feature.properties.NAME
-	  var code = "N/A"; // XXX feature.properties.CODE
+    
+	if (!feature.properties) {
+		alert("no feature.properties (geotop)");
+	}  
+	
+	// TODO id is not the index - this is a hack!
+	var index = feature.properties.refId;
+	var objEarthcache = dataEarthcaches[index-1];
+	if ( objEarthcache.id != feature.properties.refId ) {
+		alert( "Earthcaches: id mismatch "+objEarthcache.id+" "+feature.properties.refId);
+	}
+	
+	var name = objEarthcache.name; 
+	var code = objEarthcache.CODE; 
 	  
-      var content = "<table class='table table-striped table-bordered table-condensed'>" + "<tr><th>Name</th><td>" + name + "</td></tr>" + 
+    var content = "<table class='table table-striped table-bordered table-condensed'>" + "<tr><th>Name</th><td>" + name + "</td></tr>" + 
 		"<tr><th>Website</th><td><a class='url-break' href='http://coord.info/" + code + "' target='_blank'>http://coord.info/" + code + "</a></td></tr>" + "<table>";
-      layer.on({
+    
+	layer.on({
         click: function (e) {
           $("#feature-title").html('<img width="20" height="23" src="assets/img/earthcache.png">&nbsp;'+name);
           $("#feature-info").html(content);
           $("#featureModal").modal("show");
           highlight.clearLayers().addLayer(L.circleMarker([feature.geometry.coordinates[1], feature.geometry.coordinates[0]], highlightStyle));
         }
-      });
-      $("#feature-list tbody").append('<tr class="feature-row" id="' + L.stamp(layer) + '" lat="' + layer.getLatLng().lat + '" lng="' + layer.getLatLng().lng + '"><td style="vertical-align: middle;"><img width="16" height="18" src="assets/img/earthcache.png"></td><td class="feature-name">' + layer.feature.properties.NAME + '</td><td style="vertical-align: middle;"><i class="fa fa-chevron-right pull-right"></i></td></tr>');
+    });
+    
+	$("#feature-list tbody").append('<tr class="feature-row" id="' + L.stamp(layer) + '" lat="' + layer.getLatLng().lat + '" lng="' + layer.getLatLng().lng + '"><td style="vertical-align: middle;"><img width="16" height="18" src="assets/img/earthcache.png"></td><td class="feature-name">' + name + '</td><td style="vertical-align: middle;"><i class="fa fa-chevron-right pull-right"></i></td></tr>');
 	  
-	  var searchtokens="";
+	var searchtokens="";
 	  /* var XXX
 	  if ( layer.feature.properties.searchtokens ) {
 		  searchtokens = layer.feature.properties.searchtokens;
 	  } */
 	  
-	  var name = "N/A"; // XXX feature.properties.NAME
-	  var code = "N/A"; // XXX feature.properties.CODE
 	  var number = "N/A"; // XXX layer.feature.properties.NUMBER
 	  var geotop_name = "N/A"; // +layer.feature.properties.GEOTOPNAME
 	  
-      earthcacheSearch.push({
-
-	  
+    earthcacheSearch.push({
         name: name,
         address: "Geotop #"+number+" " + geotop_name,
 		gccode: code,
@@ -151,18 +195,29 @@ var earthcaches = L.geoJson(null, {
         lat: layer.feature.geometry.coordinates[1],
         lng: layer.feature.geometry.coordinates[0]
       });
-    }
+    
   }
-});
-$.getJSON("data/earthcaches.geojson", function (data) {
-  earthcaches.addData(data);
-  map.addLayer(earthcaches);
 });
 
 
 
 var geotops = L.geoJson(null, {
   pointToLayer: function (feature, latlng) {
+
+    if (!feature.properties) {
+		alert("no feature.properties (geotop)");
+	}  
+	
+	// TODO id is not the index - this is a hack!
+	var index = feature.properties.refId;
+	var objGeotop = dataGeotops[index-1];
+	if ( objGeotop.id != feature.properties.refId ) {
+		alert( "Geotops: id mismatch");
+	}
+	
+	var name = objGeotop.name;
+	var number = objGeotop.number; 	  
+	  
     return L.marker(latlng, {
       icon: L.icon({
         iconUrl: "assets/img/geotop.png",
@@ -170,41 +225,50 @@ var geotops = L.geoJson(null, {
         iconAnchor: [10, 23],
         popupAnchor: [0, -25]
       }),
-      title: "N/A", /// XXX feature.properties.NAME,
+      title: name,
       riseOnHover: true
     });
   },
   onEachFeature: function (feature, layer) {
-    if (feature.properties) {
-	  var name = "N/A"; // XXX feature.properties.NAME
-	  var code = "N/A"; // XXX feature.properties.CODE
-	  var number = "N/A"; // XXX layer.feature.properties.NUMBER
-	  var geotop_name = "N/A"; // +layer.feature.properties.GEOTOPNAME
+    if (!feature.properties) {
+		alert("no feature.properties (geotop)");
+	}
+	
+	// TODO id is not the index - this is a hack!
+	var index = feature.properties.refId;
+	var objGeotop = dataGeotops[index-1];
+	if ( objGeotop.id != feature.properties.refId ) {
+		alert( "Geotops: id mismatch");
+	}
+	
+	var name = objGeotop.name;
+	var number = objGeotop.number; 
+	
 	var content = "<table class='table table-striped table-bordered table-condensed'>" + "<tr><th>Name</th><td>" + name + "</td></tr>" + "<tr><th>Geotop-Nr</th><td>" + number + "</td></tr>" + "<tr><th>Website</th><td><a class='url-break' href='http://www.lfu.bayern.de/geologie/geotope_schoensten/" + number + "/index.htm' target='_blank'>Details</a>&nbsp;-&nbsp;<a class='url-break' href='http://www.lfu.bayern.de/geologie/geotope_schoensten/" + number + "/doc/"+number+"_schautafel.pdf' target='_blank'>Schautafel</a></td></tr>" + "<table>";
       layer.on({
         click: function (e) {
-          $("#feature-title").html('<img width="20" height="23" src="assets/img/geotop.png">&nbsp;'+ "N/A" /* XXX name */);
+          $("#feature-title").html('<img width="20" height="23" src="assets/img/geotop.png">&nbsp;'+ name );
           $("#feature-info").html(content);
           $("#featureModal").modal("show");
           highlight.clearLayers().addLayer(L.circleMarker([feature.geometry.coordinates[1], feature.geometry.coordinates[0]], highlightStyle));
         }
       });
-      $("#feature-list tbody").append('<tr class="feature-row" id="' + L.stamp(layer) + '" lat="' + layer.getLatLng().lat + '" lng="' + layer.getLatLng().lng + '"><td style="vertical-align: middle;"><img width="20" height="23" src="assets/img/geotop.png"></td><td class="feature-name">' + name + '</td><td style="vertical-align: middle;"><i class="fa fa-chevron-right pull-right"></i></td></tr>');
-      museumSearch.push({
+    $("#feature-list tbody").append('<tr class="feature-row" id="' + L.stamp(layer) + '" lat="' + layer.getLatLng().lat + '" lng="' + layer.getLatLng().lng + '"><td style="vertical-align: middle;"><img width="20" height="23" src="assets/img/geotop.png"></td><td class="feature-name">' + name + '</td><td style="vertical-align: middle;"><i class="fa fa-chevron-right pull-right"></i></td></tr>');
+    
+	museumSearch.push({
         name: name,
         address: "Geotop #"+number,
         source: "geotop",
         id: L.stamp(layer),
         lat: layer.feature.geometry.coordinates[1],
         lng: layer.feature.geometry.coordinates[0]
-      });
-    }
+    });
+    
   }
 });
-$.getJSON("data/geotops.geojson", function (data) {
-  geotops.addData(data);
-  map.addLayer(geotops);
-});
+
+
+
 
 
 
