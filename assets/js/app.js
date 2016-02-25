@@ -100,20 +100,20 @@ var dataGeotops = {};
 var dataEarthcaches = {};
 
 function loadData() {
-$.getJSON("data/geotops.json", function (data) {
-  dataGeotops = data.features;
-});
-$.getJSON("data/earthcaches.json", function (data) {
-  dataEarthcaches = data.features;
-});
-$.getJSON("data/geotops.geojson", function (data) {
-  geotops.addData(data);
-  map.addLayer(geotops);
-});
-$.getJSON("data/earthcaches.geojson", function (data) {
-  earthcaches.addData(data);
-  map.addLayer(earthcaches);
-});
+	$.getJSON("data/geotops.json", function (data) {
+	  dataGeotops = data.features;
+	});
+	$.getJSON("data/earthcaches.json", function (data) {
+	  dataEarthcaches = data.features;
+	});
+	$.getJSON("data/geotops.geojson", function (data) {
+	  geotops.addData(data);
+	  map.addLayer(geotops);
+	});
+	$.getJSON("data/earthcaches.geojson", function (data) {
+	  earthcaches.addData(data);
+	  map.addLayer(earthcaches);
+	});
 }
 
 loadData();
@@ -123,7 +123,7 @@ var earthcaches = L.geoJson(null, {
   pointToLayer: function (feature, latlng) {
 	  
     if (!feature.properties) {
-		alert("no feature.properties (geotop)");
+		alert("no feature.properties (earthcache)");
 	}  
 	
 	// TODO id is not the index - this is a hack!
@@ -147,7 +147,7 @@ var earthcaches = L.geoJson(null, {
   onEachFeature: function (feature, layer) {
     
 	if (!feature.properties) {
-		alert("no feature.properties (geotop)");
+		alert("no feature.properties (earthcache)");
 	}  
 	
 	// TODO id is not the index - this is a hack!
@@ -159,9 +159,20 @@ var earthcaches = L.geoJson(null, {
 	
 	var name = objEarthcache.name; 
 	var code = objEarthcache.CODE; 
+	
+	
+	// TODO id is not the index - this is a hack!
+	var index = objEarthcache.geotopId;
+	var objGeotop = dataGeotops[index-1];
+	if ( objGeotop.id != index ) {
+		alert( "Geotops: id mismatch");
+	}	
 	  
     var content = "<table class='table table-striped table-bordered table-condensed'>" + "<tr><th>Name</th><td>" + name + "</td></tr>" + 
-		"<tr><th>Website</th><td><a class='url-break' href='http://coord.info/" + code + "' target='_blank'>http://coord.info/" + code + "</a></td></tr>" + "<table>";
+		"<tr><th>Website</th><td><a class='url-break' href='http://coord.info/" + code + "' target='_blank'>http://coord.info/" + code + "</a></td></tr>" +
+		"<tr><th>Geotop</th><td>#"+objGeotop.number+"&nbsp;"+objGeotop.name+"</td></tr>" +
+		"<tr><th>Website</th><td><a class='url-break' href='http://www.lfu.bayern.de/geologie/geotope_schoensten/" + objGeotop.number + "/index.htm' target='_blank'>Details</a>&nbsp;-&nbsp;<a class='url-break' href='http://www.lfu.bayern.de/geologie/geotope_schoensten/" + objGeotop.number + "/doc/"+ objGeotop.number +"_schautafel.pdf' target='_blank'>Schautafel</a></td></tr>" +		
+		"<table>";
     
 	layer.on({
         click: function (e) {
@@ -180,16 +191,13 @@ var earthcaches = L.geoJson(null, {
 		  searchtokens = layer.feature.properties.searchtokens;
 	  } */
 	  
-	  var number = "N/A"; // XXX layer.feature.properties.NUMBER
-	  var geotop_name = "N/A"; // +layer.feature.properties.GEOTOPNAME
-	  
     earthcacheSearch.push({
         name: name,
-        address: "Geotop #"+number+" " + geotop_name,
+        address: "Geotop #"+ objGeotop.number +" " + objGeotop.name,
 		gccode: code,
 		searchtokens : searchtokens,
-		geotopname: geotop_name,	
-		geotopnumber: number,
+		geotopname: objGeotop.name,	
+		geotopnumber: objGeotop.number,
         source: "earthcache",
         id: L.stamp(layer),
         lat: layer.feature.geometry.coordinates[1],
