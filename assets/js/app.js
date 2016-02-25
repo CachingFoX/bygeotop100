@@ -118,6 +118,20 @@ function loadData() {
 
 loadData();
 
+function GetEarthcacheById( id ) {
+	// TODO id is not the index - this is a hack!
+	var objEarthcache = dataEarthcaches[/*index=*/id-1];
+	if ( objEarthcache.id != id ) {
+		alert( "Earthcaches: id mismatch ("+objEarthcache.id+") ("+id+")");
+	}
+	return	objEarthcache;
+}
+
+/* TODO oder doch GeotopId ??? 
+function GetEarthcachesByGeotopNumber( number ) {
+	
+} */
+
 
 var earthcaches = L.geoJson(null, {
   pointToLayer: function (feature, latlng) {
@@ -126,12 +140,7 @@ var earthcaches = L.geoJson(null, {
 		alert("no feature.properties (earthcache)");
 	}  
 	
-	// TODO id is not the index - this is a hack!
-	var index = feature.properties.refId;
-	var objEarthcache = dataEarthcaches[index-1];
-	if ( objEarthcache.id != feature.properties.refId ) {
-		alert( "Earthcaches: id mismatch "+objEarthcache.id+" "+feature.properties.refId);
-	}
+	var objEarthcache = GetEarthcacheById( feature.properties.refId );
 	  
     return L.marker(latlng, {
       icon: L.icon({
@@ -150,23 +159,12 @@ var earthcaches = L.geoJson(null, {
 		alert("no feature.properties (earthcache)");
 	}  
 	
-	// TODO id is not the index - this is a hack!
-	var index = feature.properties.refId;
-	var objEarthcache = dataEarthcaches[index-1];
-	if ( objEarthcache.id != feature.properties.refId ) {
-		alert( "Earthcaches: id mismatch "+objEarthcache.id+" "+feature.properties.refId);
-	}
+	var objEarthcache = GetEarthcacheById( feature.properties.refId );
 	
 	var name = objEarthcache.name; 
 	var code = objEarthcache.CODE; 
 	
-	
-	// TODO id is not the index - this is a hack!
-	var index = objEarthcache.geotopId;
-	var objGeotop = dataGeotops[index-1];
-	if ( objGeotop.id != index ) {
-		alert( "Geotops: id mismatch");
-	}	
+	var objGeotop = GetGeotopById( objEarthcache.geotopId );
 	  
     var content = "<table class='table table-striped table-bordered table-condensed'>" + "<tr><th>Name</th><td>" + name + "</td></tr>" + 
 		"<tr><th>Website</th><td><a class='url-break' href='http://coord.info/" + code + "' target='_blank'>http://coord.info/" + code + "</a></td></tr>" +
@@ -208,6 +206,14 @@ var earthcaches = L.geoJson(null, {
 });
 
 
+function GetGeotopById( id ) {
+	// TODO id is not the index - this is a hack!
+	var objGeotop = dataGeotops[/*index=*/id-1];
+	if ( objGeotop && (objGeotop.id != id) ) {
+		alert( "Geotops: id mismatch ("+objGeotop.id+") ("+id+")");
+	}
+	return objGeotop;	
+}
 
 var geotops = L.geoJson(null, {
   pointToLayer: function (feature, latlng) {
@@ -216,12 +222,7 @@ var geotops = L.geoJson(null, {
 		alert("no feature.properties (geotop)");
 	}  
 	
-	// TODO id is not the index - this is a hack!
-	var index = feature.properties.refId;
-	var objGeotop = dataGeotops[index-1];
-	if ( objGeotop.id != feature.properties.refId ) {
-		alert( "Geotops: id mismatch");
-	}
+	var objGeotop = GetGeotopById( feature.properties.refId );
 	
 	var name = objGeotop.name;
 	var number = objGeotop.number; 	  
@@ -242,12 +243,7 @@ var geotops = L.geoJson(null, {
 		alert("no feature.properties (geotop)");
 	}
 	
-	// TODO id is not the index - this is a hack!
-	var index = feature.properties.refId;
-	var objGeotop = dataGeotops[index-1];
-	if ( objGeotop.id != feature.properties.refId ) {
-		alert( "Geotops: id mismatch");
-	}
+	var objGeotop = GetGeotopById( feature.properties.refId );
 	
 	var name = objGeotop.name;
 	var number = objGeotop.number; 
