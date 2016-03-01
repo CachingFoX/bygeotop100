@@ -57,17 +57,17 @@ function sidebarClick(id) {
 function syncSidebar() {
   /* Empty sidebar features */
   $("#feature-list tbody").empty();
-  /* Loop through earthcaches layer and add only features which are in the map bounds */
-  if (map.hasLayer(earthcaches)) {
-	earthcaches.eachLayer(function (layer) {
+  /* Loop through earthcachesLayer layer and add only features which are in the map bounds */
+  if (map.hasLayer(earthcachesLayer)) {
+	earthcachesLayer.eachLayer(function (layer) {
       if (map.getBounds().contains(layer.getLatLng())) {
         $("#feature-list tbody").append('<tr class="feature-row" id="' + L.stamp(layer) + '" lat="' + layer.getLatLng().lat + '" lng="' + layer.getLatLng().lng + '"><td style="vertical-align: middle;"><img width="20" height="23" src="assets/img/earthcache.png"></td><td class="feature-name">' + layer.feature.properties.NAME + '<br><span class="feature-subname">Geotop Nummer '+layer.feature.properties.NUMBER+'<br>'+layer.feature.properties.CODE+'</span></td><td style="vertical-align: middle;"><i class="fa fa-chevron-right pull-right"></i></td></tr>');
       }
     });
   }
   /* Loop through geotops layer and add only features which are in the map bounds */
-  if (map.hasLayer(geotops)) {
-	geotops.eachLayer(function (layer) {
+  if (map.hasLayer(geotopsLayer)) {
+	geotopsLayer.eachLayer(function (layer) {
       if (map.getBounds().contains(layer.getLatLng())) {
 		  
 	  var name = "N/A"; // XXX layer.feature.properties.NAME
@@ -161,15 +161,15 @@ function loadData( step ) {
 			break;
 		case 2:
 			$.getJSON("data/earthcaches.geojson", function (data) {
-				earthcaches.addData(data);
-				map.addLayer(earthcaches);			
+				earthcachesLayer.addData(data);
+				map.addLayer(earthcachesLayer);			
 				loadData( step+1 );		
 			});		
 			break;
 		case 3:
 			$.getJSON("data/geotops.geojson", function (data) {
-				geotops.addData(data);
-				map.addLayer(geotops);			
+				geotopsLayer.addData(data);
+				map.addLayer(geotopsLayer);			
 				loadData( step+1 );		
 			});		
 			loadData( step+1 );		
@@ -183,7 +183,7 @@ function loadData( step ) {
 
 
 
-var earthcaches = L.geoJson(null, {
+var earthcachesLayer = L.geoJson(null, {
   pointToLayer: function (feature, latlng) {
 	  
     if (!feature.properties) {
@@ -256,7 +256,7 @@ var earthcaches = L.geoJson(null, {
 });
 
 
-var geotops = L.geoJson(null, {
+var geotopsLayer = L.geoJson(null, {
   pointToLayer: function (feature, latlng) {
 
     if (!feature.properties) {
@@ -411,8 +411,8 @@ if (document.body.clientWidth <= 767) {
 
 var groupedOverlays = {
   "Points of Interest": {
-    "<img src='assets/img/geotop.png' width='20' height='23'>&nbsp;Geotope": geotops,
-	"<img src='assets/img/earthcache.png' width='20' height='23'>&nbsp;Earthcaches": earthcaches
+    "<img src='assets/img/geotop.png' width='20' height='23'>&nbsp;Geotope": geotopsLayer,
+	"<img src='assets/img/earthcache.png' width='20' height='23'>&nbsp;Earthcaches": earthcachesLayer
   },
   "Höhen" : {
 	"Schatten": mapLayerHillshadow,
@@ -502,8 +502,8 @@ $(document).one("ajaxStop", function () {
     }
   }).on("typeahead:selected", function (obj, datum) {
     if (datum.source === "earthcache") {
-      if (!map.hasLayer(earthcaches)) {
-        map.addLayer(earthcaches);
+      if (!map.hasLayer(earthcachesLayer)) {
+        map.addLayer(earthcachesLayer);
       }
       map.setView([datum.lat, datum.lng], 17);
       if (map._layers[datum.id]) {
@@ -511,8 +511,8 @@ $(document).one("ajaxStop", function () {
       }
     }
     if (datum.source === "geotop") {
-      if (!map.hasLayer(geotops)) {
-        map.addLayer(geotops);
+      if (!map.hasLayer(geotopsLayer)) {
+        map.addLayer(geotopsLayer);
       }
       map.setView([datum.lat, datum.lng], 17);
       if (map._layers[datum.id]) {
