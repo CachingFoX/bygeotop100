@@ -96,41 +96,91 @@ var highlightStyle = {
   radius: 10
 };
 
-var dataGeotops = {};
-var dataEarthcaches = {};
+var D = {};
 
-function loadData() {
-	$.getJSON("data/geotops.json", function (data) {
-	  dataGeotops = data.features;
-	});
-	$.getJSON("data/earthcaches.json", function (data) {
-	  dataEarthcaches = data.features;
-	});
-	$.getJSON("data/geotops.geojson", function (data) {
-	  geotops.addData(data);
-	  map.addLayer(geotops);
-	});
-	$.getJSON("data/earthcaches.geojson", function (data) {
-	  earthcaches.addData(data);
-	  map.addLayer(earthcaches);
-	});
-}
-
-loadData();
-
-function GetEarthcacheById( id ) {
-	// TODO id is not the index - this is a hack!
-	var objEarthcache = dataEarthcaches[/*index=*/id-1];
-	if ( objEarthcache.id != id ) {
-		alert( "Earthcaches: id mismatch ("+objEarthcache.id+") ("+id+")");
-	}
-	return	objEarthcache;
-}
-
-/* TODO oder doch GeotopId ??? 
-function GetEarthcachesByGeotopNumber( number ) {
+D.Geotops = {
 	
-} */
+	data : {},
+	
+	GetById : function ( id ) {
+		// TODO id is not the index - this is a hack!
+		var objGeotop = this.data[/*index=*/id-1];
+		if ( objGeotop ) {
+			if ( objGeotop.id && (objGeotop.id != id) ) {
+				alert( "Geotops: id mismatch ("+objGeotop.id+") ("+id+")");
+			}
+		} else {
+			alert ( dataGeotops );
+		}
+	
+		return objGeotop;		
+	}
+}
+D.Earthcaches = {
+	
+	data : {},
+	
+	GetById : function ( id ) {
+		// TODO id is not the index - this is a hack!
+		var objEarthcache = this.data[/*index=*/ id-1];
+
+		if ( objEarthcache ) {
+			if ( objEarthcache.id && (objEarthcache.id != id) ) {
+				alert( "Earthcaches: id mismatch ("+objEarthcache.id+") ("+id+")");
+			}
+		} else {
+			alert( objEarthcache );
+		}
+		
+		return	objEarthcache;			
+		
+	}
+	
+	/*GetByGeotopId : function ( id ) {
+	}
+	GetByGeotopNumber : function ( number ) {
+	}*/
+	
+}
+
+function loadData( step ) {
+	
+	console.log( "+loadData( step="+step+" )" );
+	switch ( step ) {
+		case 0:
+			$.getJSON( "data/earthcaches.json", function(data) {
+				D.Earthcaches.data = data.features;
+			} );
+			loadData( step+1 );
+			break;
+		case 1: 
+			$.getJSON( "data/geotops.json", function(data) {
+				D.Geotops.data = data.features;
+			} );
+			loadData( step+1 );			
+			break;
+		case 2:
+			$.getJSON("data/earthcaches.geojson", function (data) {
+				earthcaches.addData(data);
+				map.addLayer(earthcaches);			
+				loadData( step+1 );		
+			});		
+			break;
+		case 3:
+			$.getJSON("data/geotops.geojson", function (data) {
+				geotops.addData(data);
+				map.addLayer(geotops);			
+				loadData( step+1 );		
+			});		
+			loadData( step+1 );		
+			break;
+	}
+	console.log( "-loadData( step="+step+" )" );	
+}
+
+
+
+
 
 
 var earthcaches = L.geoJson(null, {
@@ -140,7 +190,7 @@ var earthcaches = L.geoJson(null, {
 		alert("no feature.properties (earthcache)");
 	}  
 	
-	var objEarthcache = GetEarthcacheById( feature.properties.refId );
+	var objEarthcache = D.Earthcaches.GetById( feature.properties.refId );
 	  
     return L.marker(latlng, {
       icon: L.icon({
@@ -159,12 +209,12 @@ var earthcaches = L.geoJson(null, {
 		alert("no feature.properties (earthcache)");
 	}  
 	
-	var objEarthcache = GetEarthcacheById( feature.properties.refId );
+	var objEarthcache = D.Earthcaches.GetById( feature.properties.refId );
 	
 	var name = objEarthcache.name; 
 	var code = objEarthcache.CODE; 
 	
-	var objGeotop = GetGeotopById( objEarthcache.geotopId );
+	var objGeotop = D.Geotops.GetById( objEarthcache.geotopId );
 	  
     var content = "<table class='table table-striped table-bordered table-condensed'>" + "<tr><th>Name</th><td>" + name + "</td></tr>" + 
 		"<tr><th>Website</th><td><a class='url-break' href='http://coord.info/" + code + "' target='_blank'>http://coord.info/" + code + "</a></td></tr>" +
@@ -206,15 +256,6 @@ var earthcaches = L.geoJson(null, {
 });
 
 
-function GetGeotopById( id ) {
-	// TODO id is not the index - this is a hack!
-	var objGeotop = dataGeotops[/*index=*/id-1];
-	if ( objGeotop && (objGeotop.id != id) ) {
-		alert( "Geotops: id mismatch ("+objGeotop.id+") ("+id+")");
-	}
-	return objGeotop;	
-}
-
 var geotops = L.geoJson(null, {
   pointToLayer: function (feature, latlng) {
 
@@ -222,7 +263,7 @@ var geotops = L.geoJson(null, {
 		alert("no feature.properties (geotop)");
 	}  
 	
-	var objGeotop = GetGeotopById( feature.properties.refId );
+	var objGeotop = D.Geotops.GetById( feature.properties.refId );
 	
 	var name = objGeotop.name;
 	var number = objGeotop.number; 	  
@@ -243,7 +284,7 @@ var geotops = L.geoJson(null, {
 		alert("no feature.properties (geotop)");
 	}
 	
-	var objGeotop = GetGeotopById( feature.properties.refId );
+	var objGeotop = D.Geotops.GetById( feature.properties.refId );
 	
 	var name = objGeotop.name;
 	var number = objGeotop.number; 
@@ -501,3 +542,5 @@ if (!L.Browser.touch) {
 } else {
   L.DomEvent.disableClickPropagation(container);
 }
+
+loadData(0);
