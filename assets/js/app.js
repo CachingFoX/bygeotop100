@@ -110,7 +110,7 @@ D.Geotops = {
 				alert( "Geotops: id mismatch ("+objGeotop.id+") ("+id+")");
 			}
 		} else {
-			alert ( dataGeotops );
+			alert (objGeotop );
 		}
 	
 		return objGeotop;		
