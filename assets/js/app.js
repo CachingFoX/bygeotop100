@@ -150,14 +150,14 @@ function loadData( step ) {
 		case 0:
 			$.getJSON( "data/earthcaches.json", function(data) {
 				D.Earthcaches.data = data.features;
+				loadData( step+1 );	
 			} );
-			loadData( step+1 );
 			break;
 		case 1: 
 			$.getJSON( "data/geotops.json", function(data) {
 				D.Geotops.data = data.features;
-			} );
-			loadData( step+1 );			
+				loadData( step+1 );	
+			} );				
 			break;
 		case 2:
 			$.getJSON("data/earthcaches.geojson", function (data) {
@@ -172,13 +172,29 @@ function loadData( step ) {
 				map.addLayer(geotopsLayer);			
 				loadData( step+1 );		
 			});		
-			loadData( step+1 );		
 			break;
+		case 4:
+			$.getJSON("data/bundeslaender_simplify0.geojson", function (data) {
+			  borderLayer.addData(data);
+			  map.addLayer(borderLayer);		
+			  loadData( step+1 );	
+			});		
+			break;
+			
 	}
 	console.log( "-loadData( step="+step+" )" );	
 }
 
 
+var borderLayer = L.geoJson(null, {
+  style: function (feature) {
+      return {
+        color: "#ff3135",
+        weight: 3,
+        opacity: 1
+      };	  
+  }
+});
 
 
 
@@ -410,9 +426,10 @@ if (document.body.clientWidth <= 767) {
 }
 
 var groupedOverlays = {
-  "Points of Interest": {
+  "Daten": {
     "<img src='assets/img/geotop.png' width='20' height='23'>&nbsp;Geotope": geotopsLayer,
-	"<img src='assets/img/earthcache.png' width='20' height='23'>&nbsp;Earthcaches": earthcachesLayer
+	"<img src='assets/img/earthcache.png' width='20' height='23'>&nbsp;Earthcaches": earthcachesLayer,
+	"Grenzverlauf Bayern" : borderLayer
   },
   "Höhen" : {
 	"Schatten": mapLayerHillshadow,
