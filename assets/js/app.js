@@ -101,6 +101,7 @@ var D = {};
 D.Geotops = {
 	
 	data : {},
+	tags : {},
 	
 	GetById : function ( id ) {
 		// TODO id is not the index - this is a hack!
@@ -114,8 +115,23 @@ D.Geotops = {
 		}
 	
 		return objGeotop;		
+	},
+	
+	GetTagsById : function ( id ) {
+		var index=0;
+		var tags = "";
+
+		for (index = 0; index < this.data.length; ++index) {
+			var object = this.tags[index];
+			if ( object.geotopId == id ) {
+				tags = object.tags;
+				break;
+			}
+		}		
+		return tags;
 	}
 }
+
 D.Earthcaches = {
 	
 	data : {},
@@ -134,13 +150,21 @@ D.Earthcaches = {
 		
 		return	objEarthcache;			
 		
-	}
+	},
 	
-	/*GetByGeotopId : function ( id ) {
+	GetByGeotopId : function ( id ) {
+		var objEarthcaches = [];
+		var index=0;
+
+		for (index = 0; index < this.data.length; ++index) {
+			var objEarthcache = this.data[index];
+			if ( objEarthcache.geotopId == id ) {
+				objEarthcaches.push(objEarthcache);
+			}
+		}		
+
+		return objEarthcaches;
 	}
-	GetByGeotopNumber : function ( number ) {
-	}*/
-	
 }
 
 function loadData( step ) {
@@ -159,21 +183,34 @@ function loadData( step ) {
 				loadData( step+1 );	
 			} );				
 			break;
-		case 2:
+		case 2: 
+			$.getJSON( "data/geotops-tags.json", function(data) {
+				D.Geotops.tags = data;
+				loadData( step+1 );	
+			} );				
+			break;
+		case 3: 
+			loadData( step+1 );				
+			break;			
+		case 4:
 			$.getJSON("data/earthcaches.geojson", function (data) {
 				earthcachesLayer.addData(data);
-				map.addLayer(earthcachesLayer);			
+				map.addLayer(earthcachesLayer);
+
+				earthcachesArchivedLayer.addData(data);
+				map.addLayer(earthcachesArchivedLayer);
+
 				loadData( step+1 );		
 			});		
 			break;
-		case 3:
+		case 5:
 			$.getJSON("data/geotops.geojson", function (data) {
 				geotopsLayer.addData(data);
 				map.addLayer(geotopsLayer);			
 				loadData( step+1 );		
 			});		
 			break;
-		case 4:
+		case 6:
 			$.getJSON("data/bundeslaender_simplify0.geojson", function (data) {
 			  borderLayer.addData(data);
 			  map.addLayer(borderLayer);		
@@ -197,8 +234,6 @@ var borderLayer = L.geoJson(null, {
 });
 
 
-
-
 var earthcachesLayer = L.geoJson(null, {
   pointToLayer: function (feature, latlng) {
 	  
@@ -219,6 +254,12 @@ var earthcachesLayer = L.geoJson(null, {
       riseOnHover: true
     });
   },
+  
+  filter: function(feature, layer) {
+	  var objEarthcache = D.Earthcaches.GetById( feature.properties.refId );
+	  return !( objEarthcache.archived && objEarthcache.archived == true );
+  },  
+  
   onEachFeature: function (feature, layer) {
     
 	if (!feature.properties) {
@@ -249,19 +290,16 @@ var earthcachesLayer = L.geoJson(null, {
     
 	$("#feature-list tbody").append('<tr class="feature-row" id="' + L.stamp(layer) + '" lat="' + layer.getLatLng().lat + '" lng="' + layer.getLatLng().lng + '"><td style="vertical-align: middle;"><img width="16" height="18" src="assets/img/earthcache.png"></td><td class="feature-name">' + name + '</td><td style="vertical-align: middle;"><i class="fa fa-chevron-right pull-right"></i></td></tr>');
 	  
-	var searchtokens="";
-	  /* var XXX
-	  if ( layer.feature.properties.searchtokens ) {
-		  searchtokens = layer.feature.properties.searchtokens;
-	  } */
-	  
+	var searchtokens = D.Geotops.GetTagsById( objEarthcache.geotopId );
+	searchtokens = searchtokens+" "+objGeotop.number;
+	
     earthcacheSearch.push({
         name: name,
-        address: "Geotop #"+ objGeotop.number +" " + objGeotop.name,
 		gccode: code,
 		searchtokens : searchtokens,
 		geotopname: objGeotop.name,	
 		geotopnumber: objGeotop.number,
+		icon: "assets/img/earthcache.png",
         source: "earthcache",
         id: L.stamp(layer),
         lat: layer.feature.geometry.coordinates[1],
@@ -271,6 +309,99 @@ var earthcachesLayer = L.geoJson(null, {
   }
 });
 
+
+var earthcachesArchivedLayer = L.geoJson(null, {
+  pointToLayer: function (feature, latlng) {
+	  
+    if (!feature.properties) {
+		alert("no feature.properties (earthcache)");
+	}  
+	
+	var objEarthcache = D.Earthcaches.GetById( feature.properties.refId );
+	  
+    return L.marker(latlng, {
+      icon: L.icon({
+        iconUrl: "assets/img/earthcache-archived.png",
+        iconSize: [20, 23],
+        iconAnchor: [10, 23],
+        popupAnchor: [0, -25]
+      }),
+      title: objEarthcache.name, 
+      riseOnHover: true
+    });
+  },
+  
+  filter: function(feature, layer) {
+	  var objEarthcache = D.Earthcaches.GetById( feature.properties.refId );
+	  return ( objEarthcache.archived && objEarthcache.archived == true );
+  },
+  
+  onEachFeature: function (feature, layer) {
+    
+	if (!feature.properties) {
+		alert("no feature.properties (earthcache)");
+	}  
+	
+	var objEarthcache = D.Earthcaches.GetById( feature.properties.refId );
+	
+	var name = objEarthcache.name; 
+	var code = objEarthcache.CODE; 
+	
+	var objGeotop = D.Geotops.GetById( objEarthcache.geotopId );
+	  
+    var content = "<table class='table table-striped table-bordered table-condensed'>" + "<tr><th>Name</th><td>" + name + "</td></tr>" + 
+		"<tr><th>Website</th><td><a class='url-break' href='http://coord.info/" + code + "' target='_blank'>http://coord.info/" + code + "</a></td></tr>" +
+		"<tr><th>Geotop</th><td>#"+objGeotop.number+"&nbsp;"+objGeotop.name+"</td></tr>" +
+		"<tr><th>Website</th><td><a class='url-break' href='http://www.lfu.bayern.de/geologie/geotope_schoensten/" + objGeotop.number + "/index.htm' target='_blank'>Details</a>&nbsp;-&nbsp;<a class='url-break' href='http://www.lfu.bayern.de/geologie/geotope_schoensten/" + objGeotop.number + "/doc/"+ objGeotop.number +"_schautafel.pdf' target='_blank'>Schautafel</a></td></tr>" +		
+		"<table>";
+    
+	layer.on({
+        click: function (e) {
+          $("#feature-title").html('<img width="20" height="23" src="assets/img/earthcache.png">&nbsp;'+name);
+          $("#feature-info").html(content);
+          $("#featureModal").modal("show");
+          highlight.clearLayers().addLayer(L.circleMarker([feature.geometry.coordinates[1], feature.geometry.coordinates[0]], highlightStyle));
+        }
+    });
+    
+	$("#feature-list tbody").append('<tr class="feature-row" id="' + L.stamp(layer) + '" lat="' + layer.getLatLng().lat + '" lng="' + layer.getLatLng().lng + '"><td style="vertical-align: middle;"><img width="16" height="18" src="assets/img/earthcache.png"></td><td class="feature-name">' + name + '</td><td style="vertical-align: middle;"><i class="fa fa-chevron-right pull-right"></i></td></tr>');
+	  
+	var searchtokens = D.Geotops.GetTagsById( objEarthcache.geotopId );
+	searchtokens = searchtokens+" "+objGeotop.number;
+	  
+    earthcacheSearch.push({
+        name: name,
+		gccode: code,
+		searchtokens : searchtokens,
+		geotopname: objGeotop.name,	
+		geotopnumber: objGeotop.number,
+		icon: "assets/img/earthcache-archived.png",
+        source: "earthcache-archived",
+        id: L.stamp(layer),
+        lat: layer.feature.geometry.coordinates[1],
+        lng: layer.feature.geometry.coordinates[0]
+      });
+    
+  }
+});
+
+var iconPinGeotops = {
+	
+	options : {
+		iconUrl: "assets/img/geotop.png",
+        iconSize: [20, 23],
+        iconAnchor: [10, 23],
+        popupAnchor: [0, -25]
+	},
+	
+	getHtmlImgElement : function () {
+		return '<img width="'+this.options.iconSize[0]+'" height="'+this.options.iconSize[1]+'" src="'+this.options.iconUrl+'">';
+	},
+	
+	getUrl : function () {
+		return this.options.iconUrl;
+	}
+}
 
 var geotopsLayer = L.geoJson(null, {
   pointToLayer: function (feature, latlng) {
@@ -285,12 +416,7 @@ var geotopsLayer = L.geoJson(null, {
 	var number = objGeotop.number; 	  
 	  
     return L.marker(latlng, {
-      icon: L.icon({
-        iconUrl: "assets/img/geotop.png",
-        iconSize: [20, 23],
-        iconAnchor: [10, 23],
-        popupAnchor: [0, -25]
-      }),
+      icon: L.icon( iconPinGeotops.options ),
       title: name,
       riseOnHover: true
     });
@@ -305,10 +431,20 @@ var geotopsLayer = L.geoJson(null, {
 	var name = objGeotop.name;
 	var number = objGeotop.number; 
 	
-	var content = "<table class='table table-striped table-bordered table-condensed'>" + "<tr><th>Name</th><td>" + name + "</td></tr>" + "<tr><th>Geotop-Nr</th><td>" + number + "</td></tr>" + "<tr><th>Website</th><td><a class='url-break' href='http://www.lfu.bayern.de/geologie/geotope_schoensten/" + number + "/index.htm' target='_blank'>Details</a>&nbsp;-&nbsp;<a class='url-break' href='http://www.lfu.bayern.de/geologie/geotope_schoensten/" + number + "/doc/"+number+"_schautafel.pdf' target='_blank'>Schautafel</a></td></tr>" + "<table>";
-      layer.on({
+	var content = "<table class='table table-striped table-bordered table-condensed'>" + "<tr><th>Name</th><td>" + name + "</td></tr>" + "<tr><th>Geotop-Nr</th><td>" + number + "</td></tr>" + "<tr><th>Website</th><td><a class='url-break' href='http://www.lfu.bayern.de/geologie/geotope_schoensten/" + number + "/index.htm' target='_blank'>Details</a>&nbsp;-&nbsp;<a class='url-break' href='http://www.lfu.bayern.de/geologie/geotope_schoensten/" + number + "/doc/"+number+"_schautafel.pdf' target='_blank'>Schautafel</a></td></tr></table>"; 
+	
+	content = content + "<p>&nbsp;</p><h4 class='typeahead-header'><img src='assets/img/earthcache.png' width='20' height='23'>&nbsp;Earthcaches</h4>";
+	
+	var index=0;
+	var objEarthcaches = D.Earthcaches.GetByGeotopId( feature.properties.refId );
+	for (index = 0; index < objEarthcaches.length; ++index) {
+		content = content + "<a class='url-break' href='http://coord.info/" + objEarthcaches[index].CODE + "' target='_blank'>"+objEarthcaches[index].name+" ("+objEarthcaches[index].CODE+")</a><br/>";
+	}	
+
+	
+    layer.on({
         click: function (e) {
-          $("#feature-title").html('<img width="20" height="23" src="assets/img/geotop.png">&nbsp;'+ name );
+          $("#feature-title").html(iconPinGeotops.getHtmlImgElement()+'&nbsp;'+ name );
           $("#feature-info").html(content);
           $("#featureModal").modal("show");
           highlight.clearLayers().addLayer(L.circleMarker([feature.geometry.coordinates[1], feature.geometry.coordinates[0]], highlightStyle));
@@ -316,10 +452,16 @@ var geotopsLayer = L.geoJson(null, {
       });
     $("#feature-list tbody").append('<tr class="feature-row" id="' + L.stamp(layer) + '" lat="' + layer.getLatLng().lat + '" lng="' + layer.getLatLng().lng + '"><td style="vertical-align: middle;"><img width="20" height="23" src="assets/img/geotop.png"></td><td class="feature-name">' + name + '</td><td style="vertical-align: middle;"><i class="fa fa-chevron-right pull-right"></i></td></tr>');
     
+	var searchtokens = D.Geotops.GetTagsById( feature.properties.refId );
+	searchtokens = searchtokens+" "+objGeotop.number;
+	
 	museumSearch.push({
         name: name,
-        address: "Geotop #"+number,
+		geotopname: objGeotop.name,	
+		geotopnumber: objGeotop.number,
+		icon: "assets/img/geotop.png",
         source: "geotop",
+		searchtokens : searchtokens,
         id: L.stamp(layer),
         lat: layer.feature.geometry.coordinates[1],
         lng: layer.feature.geometry.coordinates[0]
@@ -328,6 +470,7 @@ var geotopsLayer = L.geoJson(null, {
   }
 });
 
+geotopsLayer.icon = iconPinGeotops;
 
 
 
@@ -429,7 +572,10 @@ var groupedOverlays = {
   "Daten": {
     "<img src='assets/img/geotop.png' width='20' height='23'>&nbsp;Geotope": geotopsLayer,
 	"<img src='assets/img/earthcache.png' width='20' height='23'>&nbsp;Earthcaches": earthcachesLayer,
-	"Grenzverlauf Bayern" : borderLayer
+	"<img src='assets/img/earthcache-archived.png' width='20' height='23'>&nbsp;Earthcaches archived": earthcachesArchivedLayer
+  },
+  "Overlays" : {
+	"Bayern" : borderLayer  
   },
   "Höhen" : {
 	"Schatten": mapLayerHillshadow,
@@ -482,7 +628,10 @@ $(document).one("ajaxStop", function () {
   var museumsBH = new Bloodhound({
     name: "geotops",
     datumTokenizer: function (d) {
-      return Bloodhound.tokenizers.whitespace(d.name);
+      var tokens1 = Bloodhound.tokenizers.whitespace(d.name);
+	  var tokens2 = Bloodhound.tokenizers.whitespace(d.searchtokens);
+	  var tokens = tokens1.concat(tokens2);
+	  return tokens;
     },
     queryTokenizer: function (d) {
 		var tokens = Bloodhound.tokenizers.whitespace(d);
@@ -507,7 +656,7 @@ $(document).one("ajaxStop", function () {
     source: earthcacheBH.ttAdapter(),
     templates: {
       header: "<h4 class='typeahead-header'><img src='assets/img/earthcache.png' width='20' height='23'>&nbsp;Earthcaches</h4>",
-      suggestion: Handlebars.compile(["{{name}}&nbsp;({{gccode}})<br><small>&nbsp;Geotop #{{geotopnumber}} {{geotopname}}<br>&nbsp;Tags: {{searchtokens}}</small>"].join(""))
+      suggestion: Handlebars.compile(["<img src='{{icon}}' width='20' height='23'>&nbsp;{{name}}&nbsp;({{gccode}})<br><small>&nbsp;Geotop {{geotopnumber}}:&nbsp;{{geotopname}}</small>"].join(""))
     }
   }, {
     name: "geotops",
@@ -515,7 +664,7 @@ $(document).one("ajaxStop", function () {
     source: museumsBH.ttAdapter(),
     templates: {
       header: "<h4 class='typeahead-header'><img src='assets/img/geotop.png' width='20' height='23'>&nbsp;Geotope</h4>",
-      suggestion: Handlebars.compile(["{{name}}<br>&nbsp;<small>{{address}}</small>"].join(""))
+      suggestion: Handlebars.compile(["<img src='{{icon}}' width='20' height='23'>&nbsp;{{name}}<br>&nbsp;<small>Geotop {{geotopnumber}}</small>"].join(""))
     }
   }).on("typeahead:selected", function (obj, datum) {
     if (datum.source === "earthcache") {
